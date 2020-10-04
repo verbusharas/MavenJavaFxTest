@@ -1,0 +1,3 @@
+#vboxgrad .linear-grad-to-top-right{
+    -fx-background-color: linear-gradient(to top right, #ff7f50, #6a5acd);
+}

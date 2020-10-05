@@ -17,6 +17,9 @@ public class ResultController implements Initializable {
     @FXML
     private Text txtStatistics;
 
+    @FXML
+    private Text txtUserInfo;
+
     private QuestionService questionService;
     private UserService userService;
 
@@ -36,6 +39,7 @@ public class ResultController implements Initializable {
                     .append(questionService.getTrueAnswerByNumber(questionNumber.getAndIncrement()))
                     .append("\n");
         });
+        txtUserInfo.setText("Vartotojo: " + userService.getUser().toString() + " atsakymai:");
         txtStatistics.setText(results.toString());
     }
 }

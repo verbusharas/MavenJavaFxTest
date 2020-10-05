@@ -55,7 +55,7 @@ public class WelcomeController implements Initializable {
             currentUser.setCountry(tfCountry.getText());
             UserService userService = UserService.getInstance();
             userService.setUser(currentUser);
-            App.loadSampleScreen();
+            App.loadQuizScreen();
         } catch (EmptyFieldException e) {
             lblException.setText(e.getMessage());
             lblException.setVisible(true);

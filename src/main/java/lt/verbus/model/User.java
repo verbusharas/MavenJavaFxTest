@@ -47,4 +47,9 @@ public class User {
     public void setAnswers(List<Integer> answers) {
         this.answers = answers;
     }
+
+    @Override
+    public String toString() {
+        return name + " (" + city + ", " + country + ")";
+    }
 }

@@ -41,11 +41,6 @@ public class App extends Application {
         primaryStage.setScene(new Scene(welcomeRoot));
     }
 
-    public static void loadSampleScreen() throws IOException {
-        sampleRoot = FXMLLoader.load(App.class.getResource("/fxml/sample.fxml"));
-        primaryStage.setScene(new Scene(sampleRoot));
-    }
-
     public static void loadQuizScreen() throws IOException {
         quizRoot = FXMLLoader.load(App.class.getResource("/fxml/quiz.fxml"));
         primaryStage.setScene(new Scene(quizRoot));

@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 import lt.verbus.App;
 import lt.verbus.exception.EmptyFieldException;
 import lt.verbus.model.User;
-import lt.verbus.service.UserService;
+import lt.verbus.service.UserServiceSingleton;
 
 import java.io.IOException;
 import java.net.URL;
@@ -53,8 +53,8 @@ public class WelcomeController implements Initializable {
             currentUser.setName(tfName.getText());
             currentUser.setCity(tfCity.getText());
             currentUser.setCountry(tfCountry.getText());
-            UserService userService = UserService.getInstance();
-            userService.setUser(currentUser);
+            UserServiceSingleton userServiceSingleton = UserServiceSingleton.getInstance();
+            userServiceSingleton.setUser(currentUser);
             App.loadQuizScreen();
         } catch (EmptyFieldException e) {
             lblException.setText(e.getMessage());

@@ -8,7 +8,7 @@ import javafx.scene.text.Text;
 import javafx.util.StringConverter;
 import lt.verbus.App;
 import lt.verbus.service.QuestionService;
-import lt.verbus.service.UserService;
+import lt.verbus.service.UserServiceSingleton;
 
 import java.io.IOException;
 import java.net.URL;
@@ -30,37 +30,43 @@ public class QuizController implements Initializable {
     @FXML
     private Text txtSliderIndicator;
 
-
     private QuestionService questionService;
-    private UserService userService;
+    private UserServiceSingleton userService;
+
     private int currentQuestionNo;
+    private int totalQuestions;
+
     private boolean hasRemainingQuestions;
+
     private int currentYear;
     private int maxYear;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("loading questions...");
-        questionService = QuestionService.getInstance();
-        userService = UserService.getInstance();
-        System.out.println("found " + questionService.getTotalQuestionsCount() + " questions.");
+        questionService = new QuestionService();
+        userService = UserServiceSingleton.getInstance();
         currentQuestionNo = 1;
+        totalQuestions = questionService.getTotalQuestionsCount();
+
+        currentQuestionNo = 1;
+        totalQuestions = questionService.getTotalQuestionsCount();
+
         txtQuestion.setText(questionService.getQuestionByNumber(currentQuestionNo));
         formatYearSlider();
     }
 
-    public void formatYearSlider(){
+    public void formatYearSlider() {
         currentYear = LocalDate.now().getYear();
-        maxYear = currentYear + 80;
+        maxYear = currentYear + 110;
 
         // 1. Binding Text to slider value
         // 2. Rounding slider value representation to the closest multiple of 5
         yearSlider.valueProperty().addListener((obs, oldval, newVal) ->
-                txtSliderIndicator.setText(String.valueOf(5*Math.round(newVal.doubleValue()/5))));
+                txtSliderIndicator.setText(String.valueOf(5 * Math.round(newVal.doubleValue() / 5))));
 
         yearSlider.setValue(currentYear);
 
-        // User can choose from 100 year span starting with current year
+        // User can choose from 110 year span starting with current year
         yearSlider.minProperty().setValue(currentYear);
         yearSlider.maxProperty().setValue(maxYear);
 
@@ -78,17 +84,18 @@ public class QuizController implements Initializable {
     }
 
     public void btNextQuestionClicked() throws IOException {
-        try {
+        boolean hasRemainingQuestions = currentQuestionNo <= totalQuestions;
+        if (hasRemainingQuestions) {
             int userAnswer = Integer.parseInt(txtSliderIndicator.getText());
             userService.addAnswer(userAnswer);
             showNextQuestion();
-        } catch (NullPointerException ex) {
+        } else {
             App.loadResultScreen();
         }
     }
 
-    private void showNextQuestion(){
-        txtQuestion.setText(questionService.getQuestionByNumber(++currentQuestionNo));
+    private void showNextQuestion() {
+        txtQuestion.setText(questionService.getQuestionByNumber(currentQuestionNo++));
         yearSlider.setValue(currentYear);
     }
 

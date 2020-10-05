@@ -1,19 +1,36 @@
 package lt.verbus.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name = "user")
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "city")
     private String city;
+
+    @Column(name = "country")
     private String country;
-    private List<Integer> answers;
+
+//    private List<Integer> answers;
 
     public User() {
-        answers = new ArrayList<>();
+//        answers = new ArrayList<>();
     }
 
     public String getName() {
@@ -41,12 +58,12 @@ public class User {
     }
 
     public List<Integer> getAnswers() {
-        return answers;
+        return null /*answers*/;
     }
 
-    public void setAnswers(List<Integer> answers) {
-        this.answers = answers;
-    }
+//    public void setAnswers(List<Integer> answers) {
+//        this.answers = answers;
+//    }
 
     @Override
     public String toString() {

@@ -1,11 +1,13 @@
 package lt.verbus.model;
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,19 +20,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "name")
     private String name;
 
-    @Column(name = "city")
     private String city;
 
-    @Column(name = "country")
     private String country;
 
-//    private List<Integer> answers;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Answer> answers;
 
     public User() {
-//        answers = new ArrayList<>();
+        answers = new ArrayList<>();
     }
 
     public String getName() {
@@ -57,13 +57,13 @@ public class User {
         this.country = country;
     }
 
-    public List<Integer> getAnswers() {
-        return null /*answers*/;
+    public List<Answer> getAnswers() {
+        return answers;
     }
 
-//    public void setAnswers(List<Integer> answers) {
-//        this.answers = answers;
-//    }
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
+    }
 
     @Override
     public String toString() {

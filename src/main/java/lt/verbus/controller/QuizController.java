@@ -2,11 +2,11 @@ package lt.verbus.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.text.Text;
 import javafx.util.StringConverter;
 import lt.verbus.App;
+import lt.verbus.model.Answer;
 import lt.verbus.service.QuestionService;
 import lt.verbus.service.UserServiceSingleton;
 
@@ -22,9 +22,6 @@ public class QuizController implements Initializable {
     private Text txtQuestion;
 
     @FXML
-    private Button btNextQuestion;
-
-    @FXML
     private Slider yearSlider;
 
     @FXML
@@ -36,23 +33,21 @@ public class QuizController implements Initializable {
     private int currentQuestionNo;
     private int totalQuestions;
 
-    private boolean hasRemainingQuestions;
-
     private int currentYear;
     private int maxYear;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        questionService = new QuestionService();
-        userService = UserServiceSingleton.getInstance();
+        injectServices();
         currentQuestionNo = 1;
         totalQuestions = questionService.getTotalQuestionsCount();
-
-        currentQuestionNo = 1;
-        totalQuestions = questionService.getTotalQuestionsCount();
-
         txtQuestion.setText(questionService.getQuestionByNumber(currentQuestionNo));
         formatYearSlider();
+    }
+
+    private void injectServices() {
+        questionService = new QuestionService();
+        userService = UserServiceSingleton.getInstance();
     }
 
     public void formatYearSlider() {
@@ -86,8 +81,13 @@ public class QuizController implements Initializable {
     public void btNextQuestionClicked() throws IOException {
         boolean hasRemainingQuestions = currentQuestionNo <= totalQuestions;
         if (hasRemainingQuestions) {
-            int userAnswer = Integer.parseInt(txtSliderIndicator.getText());
+            int userAnswerValue = Integer.parseInt(txtSliderIndicator.getText());
+
+            Answer userAnswer = new Answer();
+            userAnswer.setQuestionNumber(currentQuestionNo);
+            userAnswer.setAnswer(userAnswerValue);
             userService.addAnswer(userAnswer);
+
             showNextQuestion();
         } else {
             App.loadResultScreen();

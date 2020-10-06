@@ -16,9 +16,7 @@ public class App extends Application {
     private static Stage primaryStage;
 
     public static void main(String[] args) {
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        session.close();
+
         launch();
     }
 

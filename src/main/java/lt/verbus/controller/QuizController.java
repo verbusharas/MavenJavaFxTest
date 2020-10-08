@@ -6,17 +6,21 @@ import javafx.scene.control.Slider;
 import javafx.scene.text.Text;
 import javafx.util.StringConverter;
 import lt.verbus.App;
-import lt.verbus.model.Answer;
+import lt.verbus.domain.entity.Answer;
+import lt.verbus.domain.model.Question;
 import lt.verbus.service.QuestionService;
 import lt.verbus.service.UserServiceSingleton;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class QuizController implements Initializable {
 
+    @FXML
+    private Text txtQuestionNumber;
 
     @FXML
     private Text txtQuestion;
@@ -30,6 +34,7 @@ public class QuizController implements Initializable {
     private QuestionService questionService;
     private UserServiceSingleton userService;
 
+    List<Question> questions;
     private int currentQuestionNo;
     private int totalQuestions;
 
@@ -39,10 +44,11 @@ public class QuizController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         injectServices();
-        currentQuestionNo = 1;
-        totalQuestions = questionService.getTotalQuestionsCount();
-        txtQuestion.setText(questionService.getQuestionByNumber(currentQuestionNo));
+        questions = questionService.findAll();
+        currentQuestionNo = 0;
+        totalQuestions = questions.size();
         formatYearSlider();
+        showNextQuestion();
     }
 
     private void injectServices() {
@@ -50,7 +56,7 @@ public class QuizController implements Initializable {
         userService = UserServiceSingleton.getInstance();
     }
 
-    public void formatYearSlider() {
+    private void formatYearSlider() {
         currentYear = LocalDate.now().getYear();
         maxYear = currentYear + 110;
 
@@ -58,8 +64,6 @@ public class QuizController implements Initializable {
         // 2. Rounding slider value representation to the closest multiple of 5
         yearSlider.valueProperty().addListener((obs, oldval, newVal) ->
                 txtSliderIndicator.setText(String.valueOf(5 * Math.round(newVal.doubleValue() / 5))));
-
-        yearSlider.setValue(currentYear);
 
         // User can choose from 110 year span starting with current year
         yearSlider.minProperty().setValue(currentYear);
@@ -78,24 +82,28 @@ public class QuizController implements Initializable {
         });
     }
 
+
     public void btNextQuestionClicked() throws IOException {
-        boolean hasRemainingQuestions = currentQuestionNo <= totalQuestions;
+        setUserAnswer(Integer.parseInt(txtSliderIndicator.getText()));
+        boolean hasRemainingQuestions = ++currentQuestionNo < totalQuestions;
         if (hasRemainingQuestions) {
-            int userAnswerValue = Integer.parseInt(txtSliderIndicator.getText());
-
-            Answer userAnswer = new Answer();
-            userAnswer.setQuestionNumber(currentQuestionNo);
-            userAnswer.setAnswer(userAnswerValue);
-            userService.addAnswer(userAnswer);
-
             showNextQuestion();
         } else {
             App.loadResultScreen();
         }
     }
 
+    private void setUserAnswer(int userAnswerValue) {
+        Answer userAnswer = new Answer();
+        userAnswer.setQuestionNumber(currentQuestionNo);
+        userAnswer.setAnswer(userAnswerValue);
+        userService.addAnswer(userAnswer);
+    }
+
     private void showNextQuestion() {
-        txtQuestion.setText(questionService.getQuestionByNumber(currentQuestionNo++));
+        Question question = questions.get(currentQuestionNo);
+        txtQuestion.setText(question.getText());
+        txtQuestionNumber.setText(String.format("Klausimas %d iš %d", currentQuestionNo+1, totalQuestions));
         yearSlider.setValue(currentYear);
     }
 

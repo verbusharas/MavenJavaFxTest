@@ -1,6 +1,6 @@
 package lt.verbus.repository;
 
-import lt.verbus.model.User;
+import lt.verbus.domain.entity.User;
 import lt.verbus.util.SessionFactoryUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

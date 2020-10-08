@@ -3,8 +3,9 @@ package lt.verbus.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.text.Text;
-import lt.verbus.model.Answer;
-import lt.verbus.model.User;
+import lt.verbus.domain.entity.Answer;
+import lt.verbus.domain.entity.User;
+import lt.verbus.domain.model.Question;
 import lt.verbus.service.QuestionService;
 import lt.verbus.service.StatisticsService;
 import lt.verbus.service.UserServiceSingleton;
@@ -24,30 +25,47 @@ public class ResultController implements Initializable {
     private QuestionService questionService;
     private UserServiceSingleton userServiceSingleton;
     private StatisticsService statisticsService;
+
     private User user;
+    private List<Question> questions;
+    private List<Answer> userAnswers;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        StringBuilder results = new StringBuilder();
+        injectServices();
+
+        questions = questionService.findAll();
+        user = userServiceSingleton.getUser();
+        userAnswers = user.getAnswers();
+
+        showResults();
+        saveResults();
+    }
+
+    private void injectServices() {
         questionService = new QuestionService();
         statisticsService = new StatisticsService();
         userServiceSingleton = UserServiceSingleton.getInstance();
-        user = userServiceSingleton.getUser();
+    }
 
-        List<Answer> userAnswers = user.getAnswers();
-
+    private void showResults(){
+        StringBuilder results = new StringBuilder();
         userAnswers.forEach(answer -> {
             results.append("Klausimo nr: ")
-                    .append(answer.getQuestionNumber())
+                    .append(answer.getQuestionNumber()+1)
                     .append(" Pasirinktas atsakymas: ")
                     .append(answer)
                     .append(" Teisingas atsakymas: ")
-                    .append(questionService.getTrueAnswerByNumber(answer.getQuestionNumber()))
+                    .append(questions.get(answer.getQuestionNumber()).getCorrectAnswer())
                     .append("\n");
         });
-        txtUserInfo.setText("Vartotojo: " + userServiceSingleton.getUser().toString() + " atsakymai:");
+        txtUserInfo.setText("Vartotojo: " + user + " atsakymai:");
         txtStatistics.setText(results.toString());
+    }
+
+    private void saveResults() {
         statisticsService.save(user);
         userServiceSingleton.save(user);
     }
+
 }

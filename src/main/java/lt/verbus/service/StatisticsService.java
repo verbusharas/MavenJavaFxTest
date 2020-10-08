@@ -1,6 +1,6 @@
 package lt.verbus.service;
 
-import lt.verbus.model.User;
+import lt.verbus.domain.entity.User;
 
 public class StatisticsService {
 

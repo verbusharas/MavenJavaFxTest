@@ -1,4 +1,4 @@
-package lt.verbus.model;
+package lt.verbus.domain.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

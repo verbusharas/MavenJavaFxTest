@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import lt.verbus.App;
 import lt.verbus.exception.EmptyFieldException;
-import lt.verbus.model.User;
+import lt.verbus.domain.entity.User;
 import lt.verbus.service.UserServiceSingleton;
 
 import java.io.IOException;
@@ -49,17 +49,21 @@ public class WelcomeController implements Initializable {
     public void btStartQuizClicked() throws IOException {
         try {
             validateTextFields();
-            User currentUser = new User();
-            currentUser.setName(tfName.getText());
-            currentUser.setCity(tfCity.getText());
-            currentUser.setCountry(tfCountry.getText());
-            UserServiceSingleton userServiceSingleton = UserServiceSingleton.getInstance();
-            userServiceSingleton.setUser(currentUser);
+            loginUser();
             App.loadQuizScreen();
         } catch (EmptyFieldException e) {
             lblException.setText(e.getMessage());
             lblException.setVisible(true);
         }
+    }
+
+    private void loginUser() {
+        User currentUser = new User();
+        currentUser.setName(tfName.getText());
+        currentUser.setCity(tfCity.getText());
+        currentUser.setCountry(tfCountry.getText());
+        UserServiceSingleton userServiceSingleton = UserServiceSingleton.getInstance();
+        userServiceSingleton.setUser(currentUser);
     }
 
     private void validateTextFields() throws EmptyFieldException {

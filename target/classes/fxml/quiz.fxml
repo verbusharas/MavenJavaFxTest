@@ -10,6 +10,11 @@
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lt.verbus.controller.QuizController">
    <children>
+      <Text fx:id="txtQuestionNumber" layoutX="60.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Klausimas 1 iš 4" textAlignment="CENTER" wrappingWidth="500.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
       <Text fx:id="txtQuestion" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum a massa eu tortor lacinia cursus finibus ac sem. Morbi ac sapien ullamcorper, interdum urna nec, imperdiet libero. Nam scelerisque, augue eget viverra rhoncus, metus metus semper mi, ac commodo ante odio eget dui. Donec semper, sapien eu commodo suscipit, sapien." textAlignment="CENTER" wrappingWidth="500.0" />
       <Text fx:id="txtSliderIndicator" layoutX="60.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="YEAR" textAlignment="CENTER" wrappingWidth="500.0">
          <font>

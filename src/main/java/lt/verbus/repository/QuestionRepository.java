@@ -1,70 +1,43 @@
 package lt.verbus.repository;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import lt.verbus.domain.model.Question;
+import lt.verbus.util.XmlQuestionReader;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class QuestionRepository {
+public class QuestionRepository implements Repository<Question> {
 
-    private String questionsFileAddress;
-    private NodeList xmlQuestionNodes;
+    private final String questionsFileAddress;
 
-    public QuestionRepository(String questionsFileAddress) {
-        this.questionsFileAddress = questionsFileAddress;
+    public QuestionRepository() {
+        this.questionsFileAddress = "src/main/resources/questions/original_questions.xml";
     }
 
-    public String getQuestionByNumber(int questionNumber) {
-        return getQuestionInfoByTag(questionNumber, "text");
+    @Override
+    public List<Question> findAll() {
+        XmlQuestionReader xmlQuestionReader = new XmlQuestionReader(questionsFileAddress);
+        return xmlQuestionReader.getAllQuestions();
     }
 
-    public String getTrueAnswerByNumber(int questionNumber) {
-        return getQuestionInfoByTag(questionNumber, "answer");
+    @Override
+    public Question findById(int id) {
+        return findAll().get(id);
     }
 
-    private String getQuestionInfoByTag(int questionNumber, String infoTag){
-        String questionInfo = null;
-
-        if (xmlQuestionNodes == null) {
-            loadAllNodesFromXmlByTag("question");
-        }
-
-        Node xmlQuestionNode = xmlQuestionNodes.item(questionNumber);
-        if (xmlQuestionNode.getNodeType() == Node.ELEMENT_NODE) {
-            Element xmlQuestionElement = (Element) xmlQuestionNode;
-            questionInfo = xmlQuestionElement
-                    .getElementsByTagName(infoTag)
-                    .item(0)
-                    .getTextContent()
-                    .trim()
-                    .replaceAll("[ ]{2,}", "\n");
-        }
-
-        return questionInfo;
+    @Override
+    public void save(Question question) {
+        //TODO: save new question into XML
     }
 
-    private void loadAllNodesFromXmlByTag(String tagName) {
-        try {
-            File file = new File(questionsFileAddress);
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-            DocumentBuilder db = dbf.newDocumentBuilder();
-            Document doc = db.parse(file);
-            doc.getDocumentElement().normalize();
-            xmlQuestionNodes = doc.getElementsByTagName(tagName);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    @Override
+    public void delete(Question question) {
+        //TODO: delete question from XML
     }
-
-    public int getTotalQuestionsCount() {
-        loadAllNodesFromXmlByTag("question");
-        return xmlQuestionNodes == null ? 0 : xmlQuestionNodes.getLength();
-    }
-
 }

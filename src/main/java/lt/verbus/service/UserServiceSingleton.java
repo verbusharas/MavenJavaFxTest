@@ -1,7 +1,7 @@
 package lt.verbus.service;
 
-import lt.verbus.model.Answer;
-import lt.verbus.model.User;
+import lt.verbus.domain.entity.Answer;
+import lt.verbus.domain.entity.User;
 import lt.verbus.repository.UserRepository;
 
 public class UserServiceSingleton {

@@ -1,16 +1,9 @@
 package lt.verbus.repository;
 
-import java.io.File;
 import java.util.List;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 
 import lt.verbus.domain.model.Question;
 import lt.verbus.util.XmlQuestionReader;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 public class QuestionRepository implements Repository<Question> {
 

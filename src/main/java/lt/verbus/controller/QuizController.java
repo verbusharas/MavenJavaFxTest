@@ -59,16 +59,10 @@ public class QuizController implements Initializable {
     private void formatYearSlider() {
         currentYear = LocalDate.now().getYear();
         maxYear = currentYear + 110;
-
-        // 1. Binding Text to slider value
-        // 2. Rounding slider value representation to the closest multiple of 5
         yearSlider.valueProperty().addListener((obs, oldval, newVal) ->
                 txtSliderIndicator.setText(String.valueOf(5 * Math.round(newVal.doubleValue() / 5))));
-
-        // User can choose from 110 year span starting with current year
         yearSlider.minProperty().setValue(currentYear);
         yearSlider.maxProperty().setValue(maxYear);
-
         yearSlider.setLabelFormatter(new StringConverter<Double>() {
             @Override
             public String toString(Double n) {
@@ -81,7 +75,6 @@ public class QuizController implements Initializable {
             }
         });
     }
-
 
     public void btNextQuestionClicked() throws IOException {
         setUserAnswer(Integer.parseInt(txtSliderIndicator.getText()));

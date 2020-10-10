@@ -5,9 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 
 import java.io.IOException;
 
@@ -16,24 +13,16 @@ public class App extends Application {
     private static Stage primaryStage;
 
     public static void main(String[] args) {
-
         launch();
     }
 
     @Override
     public void start(Stage stage) throws IOException {
-
         primaryStage = stage;
         primaryStage.setResizable(false);
-
         loadWelcomeScreen();
-
         primaryStage.show();
-
-
     }
-
-
 
     public static void loadWelcomeScreen() throws IOException {
         Parent welcomeRoot = FXMLLoader.load(App.class.getResource("/fxml/welcome.fxml"));

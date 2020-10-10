@@ -1,5 +1,6 @@
 package lt.verbus.domain.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +19,7 @@ public class Answer {
     @ManyToOne
     private User user;
 
+    @Column(name = "question_number")
     private int questionNumber;
 
     private int answer;

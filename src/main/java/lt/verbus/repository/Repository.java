@@ -8,7 +8,7 @@ public interface Repository<T> {
 
     T findById(int id);
 
-    void  save(T t);
+    void save(T t);
 
     void delete(T t);
 }

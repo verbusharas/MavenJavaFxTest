@@ -1,5 +1,6 @@
 package lt.verbus.controller;
 
+import com.github.javafaker.Faker;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -70,6 +71,13 @@ public class WelcomeController implements Initializable {
         if (tfName.getText().length() < 1 || tfCity.getText().length() < 1 || tfCountry.getText().length() < 1) {
             throw new EmptyFieldException("Neskubėkite. Būtina užpildyti visus laukelius");
         }
+    }
+
+    public void btFakeLoginClicked() {
+        Faker faker = new Faker();
+        tfName.setText(faker.gameOfThrones().character());
+        tfCity.setText(faker.gameOfThrones().city());
+        tfCountry.setText("Westeros");
     }
 
 

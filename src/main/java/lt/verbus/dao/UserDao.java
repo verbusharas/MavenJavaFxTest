@@ -1,4 +1,4 @@
-package lt.verbus.repository;
+package lt.verbus.dao;
 
 import lt.verbus.domain.entity.User;
 import lt.verbus.util.SessionFactoryUtil;
@@ -6,36 +6,36 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
-public class UserRepository implements Repository<User> {
+public class UserDao implements CrudRepository<User> {
 
-    private CriteriaBuilder builder;
-    private Root<User> root;
-    private Session session;
+    protected CriteriaBuilder builder;
+    protected Root<User> userRoot;
+    protected Root<?> sourceRoot;
+    protected Session session;
 
     @Override
     public List<User> findAll() {
         CriteriaCustomizer<User> criteriaCustomizer =
                 (criteria) -> {
-                    criteria.select(root);
+                    criteria.select(userRoot);
                     return criteria;
                 };
-        return createCustomQuery(criteriaCustomizer).getResultList();
+        return createCustomQuery(criteriaCustomizer, User.class, User.class).getResultList();
     }
 
     @Override
     public User findById(int id) {
         CriteriaCustomizer<User> criteriaCustomizer =
                 (criteria) -> {
-                    criteria.select(root).where(builder.gt(root.get("id"), id));
+                    criteria.select(userRoot).where(builder.equal(sourceRoot.get("id"), id));
                     return criteria;
                 };
-        return createCustomQuery(criteriaCustomizer).getSingleResult();
+        return createCustomQuery(criteriaCustomizer, User.class, User.class).getSingleResult();
     }
 
     @Override
@@ -46,6 +46,7 @@ public class UserRepository implements Repository<User> {
             transaction = session.beginTransaction();
             session.save(user);
             transaction.commit();
+            System.out.println("user saved");
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -61,13 +62,25 @@ public class UserRepository implements Repository<User> {
         //TODO: delete user entry;
     }
 
-    private Query<User> createCustomQuery(CriteriaCustomizer<User> criteriaCustomizer) {
+    /**
+     *
+     * @param criteriaCustomizer - functional interface for custom criteria definition
+     * @param resultClass - class name of object that query should return
+     * @param sourceClass - class name of object that query parameters should be based on
+     * @param <T> - object type to be constructed from database
+     * @param <S> - object type the query parameters are based on
+     */
+    protected <T, S> Query<T> createCustomQuery(CriteriaCustomizer<T> criteriaCustomizer, Class<T> resultClass, Class<S> sourceClass) {
         session = SessionFactoryUtil.getSession();
         builder = session.getCriteriaBuilder();
-        CriteriaQuery<User> criteria = builder.createQuery(User.class);
-        root = criteria.from(User.class);
+
+        CriteriaQuery<T> criteria = builder.createQuery(resultClass);
+        sourceRoot = criteria.from(sourceClass);
+
         criteriaCustomizer.customize(criteria);
         return session.createQuery(criteria);
     }
+
+
 
 }

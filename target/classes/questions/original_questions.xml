@@ -13,7 +13,7 @@
             Kaip manote, kada medžiagas ne siųsime ir gausime, o masiškai gaminsime jungiant atomus?
         </text>
         <!-- write answer and answer_range if config.type_of_test is 0 -->
-        <answer>5</answer>
+        <answer>2025</answer>
         <answer_range>0</answer_range>
     </question>
     <question>
@@ -21,7 +21,7 @@
             1971 metais IBM išrado lankstųjį diskelį informacijos mainams tarp kompiuterių, kuomet dar internetas nebuvo paplitęs.
             Kaip manote, kuomet informacija galėsime perduoti tiesiogiai iš žmogaus žmogui (telepatija)?
         </text>
-        <answer>13</answer>
+        <answer>2033</answer>
         <answer_range>0</answer_range>
     </question>
     <question>
@@ -29,7 +29,7 @@
             2011 m. IBM dirbtinio intelekto sistema Watson nugalėjo savo varžovus klausimų-atsakimų šou "Jeopardy!" ir pasiėmė $1 mln. vertės prizą. Šiuo metu ši sistema pradedama taikyti priiminėjant sprendimus plaučių vėžio gydyme.
             Kaip manote, kada pirminė medicinos apžiūra bus pilnai automatizuota?
         </text>
-        <answer>2</answer>
+        <answer>2022</answer>
         <answer_range>0</answer_range>
     </question>
     <question>
@@ -37,7 +37,7 @@
             1956 m. IBM pristatė pirmą komercinį kietajį diską RAMAC 350.
             Kaip manote, kada asmeniniai duomenys tilps į degtuko galvutės dydžio kristalą ir nebereiks saugoti duomenų Google, Dropbox ir kt.?
         </text>
-        <answer>2</answer>
+        <answer>2022</answer>
         <answer_range>0</answer_range>
     </question>
 </main>

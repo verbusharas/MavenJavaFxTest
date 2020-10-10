@@ -1,15 +1,15 @@
-package lt.verbus.repository;
+package lt.verbus.dao;
 
 import java.util.List;
 
 import lt.verbus.domain.model.Question;
 import lt.verbus.util.XmlQuestionReader;
 
-public class QuestionRepository implements Repository<Question> {
+public class QuestionDao implements CrudRepository<Question> {
 
     private final String questionsFileAddress;
 
-    public QuestionRepository() {
+    public QuestionDao() {
         this.questionsFileAddress = "src/main/resources/questions/original_questions.xml";
     }
 

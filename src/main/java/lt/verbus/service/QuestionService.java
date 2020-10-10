@@ -1,21 +1,20 @@
 package lt.verbus.service;
 
 import lt.verbus.domain.model.Question;
-import lt.verbus.repository.QuestionRepository;
+import lt.verbus.dao.QuestionDao;
 
 import java.util.List;
-import java.util.Map;
 
 public class QuestionService {
 
-    private final QuestionRepository questionRepository;
+    private final QuestionDao questionRepository;
 
     public QuestionService() {
-        this.questionRepository = new QuestionRepository();
+        this.questionRepository = new QuestionDao();
     }
 
-    public Question getQuestionByNumber(int questionNumber) {
-        return questionRepository.findAll().get(questionNumber-1);
+    public Question getQuestionByIndex(int questionIndex) {
+        return questionRepository.findAll().get(questionIndex);
     }
 
     public List<Question> findAll(){

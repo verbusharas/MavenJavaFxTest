@@ -1,5 +1,6 @@
 package lt.verbus.controller;
 
+import com.github.javafaker.Faker;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Slider;
@@ -99,5 +100,6 @@ public class QuizController implements Initializable {
         txtQuestionNumber.setText(String.format("Klausimas %d iš %d", currentQuestionNo+1, totalQuestions));
         yearSlider.setValue(currentYear);
     }
+
 
 }

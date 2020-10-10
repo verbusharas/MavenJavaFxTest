@@ -4,7 +4,11 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import lt.verbus.dao.UserDao;
+import lt.verbus.dao.UserStatisticsDao;
 
 import java.io.IOException;
 
@@ -19,7 +23,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         primaryStage = stage;
-        primaryStage.setResizable(false);
+        primaryStage.setResizable(true);
         loadWelcomeScreen();
         primaryStage.show();
     }
@@ -40,6 +44,16 @@ public class App extends Application {
         System.out.println("switching to results");
     }
 
+
+    public static void popUpQuestionReminder() throws IOException {
+        Parent remindQuestionsRoot = FXMLLoader.load(App.class.getResource("/fxml/remind_questions.fxml"));
+        Stage popUpstage = new Stage(StageStyle.UTILITY);
+        popUpstage.initModality(Modality.APPLICATION_MODAL);
+        popUpstage.setTitle("Klausimai");
+        Scene scene = new Scene(remindQuestionsRoot);
+        popUpstage.setScene(scene);
+        popUpstage.showAndWait();
+    }
 
 }
 

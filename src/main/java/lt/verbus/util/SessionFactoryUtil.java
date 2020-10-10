@@ -17,7 +17,7 @@ public class SessionFactoryUtil {
     }
 
     public static Session getSession()  {
-        if (session == null) {
+        if (session == null || !session.isOpen()) {
             session = SessionFactoryUtil.getFactory().openSession();
         }
         return session;

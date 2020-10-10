@@ -1,8 +1,8 @@
-package lt.verbus.repository;
+package lt.verbus.dao;
 
 import java.util.List;
 
-public interface Repository<T> {
+public interface CrudRepository<T> {
 
     List<T> findAll();
 

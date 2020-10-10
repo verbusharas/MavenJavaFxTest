@@ -1,4 +1,4 @@
-package lt.verbus.repository;
+package lt.verbus.dao;
 
 import javax.persistence.criteria.CriteriaQuery;
 

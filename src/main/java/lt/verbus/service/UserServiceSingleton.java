@@ -2,16 +2,16 @@ package lt.verbus.service;
 
 import lt.verbus.domain.entity.Answer;
 import lt.verbus.domain.entity.User;
-import lt.verbus.repository.UserRepository;
+import lt.verbus.dao.UserDao;
 
 public class UserServiceSingleton {
 
     private User user;
     private static UserServiceSingleton userServiceSingleton;
-    private UserRepository userRepository;
+    private final UserDao userDao;
 
     private UserServiceSingleton() {
-        userRepository = new UserRepository();
+        userDao = new UserDao();
     }
 
     public static UserServiceSingleton getInstance() {
@@ -35,6 +35,6 @@ public class UserServiceSingleton {
     }
 
     public void save(User user) {
-        userRepository.save(user);
+        userDao.save(user);
     }
 }

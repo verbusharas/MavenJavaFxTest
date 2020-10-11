@@ -7,8 +7,6 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import lt.verbus.dao.UserDao;
-import lt.verbus.dao.UserStatisticsDao;
 
 import java.io.IOException;
 
@@ -43,7 +41,6 @@ public class App extends Application {
         primaryStage.setScene(new Scene(resultRoot));
         System.out.println("switching to results");
     }
-
 
     public static void popUpQuestionReminder() throws IOException {
         Parent remindQuestionsRoot = FXMLLoader.load(App.class.getResource("/fxml/remind_questions.fxml"));

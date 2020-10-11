@@ -6,7 +6,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import lt.verbus.App;
 import lt.verbus.exception.EmptyFieldException;
 import lt.verbus.domain.entity.User;
 import lt.verbus.service.UserServiceSingleton;
@@ -51,7 +50,7 @@ public class WelcomeController implements Initializable {
         try {
             validateTextFields();
             loginUser();
-            App.loadQuizScreen();
+            StageController.loadQuizScreen();
         } catch (EmptyFieldException e) {
             lblException.setText(e.getMessage());
             lblException.setVisible(true);

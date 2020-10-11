@@ -1,7 +1,12 @@
 package lt.verbus.controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import lt.verbus.App;
 import lt.verbus.domain.entity.Answer;
@@ -19,7 +24,7 @@ import java.util.ResourceBundle;
 public class ResultController implements Initializable {
 
     @FXML
-    private Text txtStatistics;
+    private VBox vboxFeed;
 
     @FXML
     private Text txtUserInfo;
@@ -41,7 +46,11 @@ public class ResultController implements Initializable {
         userAnswers = user.getAnswers();
 
         saveResults();
-        showResults();
+        try {
+            showResults();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void injectServices() {
@@ -50,14 +59,13 @@ public class ResultController implements Initializable {
         userServiceSingleton = UserServiceSingleton.getInstance();
     }
 
-    private void showResults() {
+    private void showResults() throws IOException {
         StringBuilder results = new StringBuilder();
 
         userAnswers.forEach(answer -> {
             int questionIndex = answer.getQuestionNumber();
             Question question = questions.get(questionIndex);
             String correctAnswer = question.getCorrectAnswer();
-            String allowedDeviation = question.getAllowedAnswerDeviationRange();
 
             double ratioToCorrectAnswer = userStatisticsService.compareUserAnswerToCorrectAnswer(questionIndex, answer.getAnswer());
             double ratioToAvgAnswer = userStatisticsService.compareUserAnswerToAverageAnswer(questionIndex, answer.getAnswer());
@@ -74,7 +82,13 @@ public class ResultController implements Initializable {
                     .append(buildComparativeString(ratioToAvgAnswer, "dauguma vartotojų.\n\n"));
         });
         txtUserInfo.setText("Vartotojo: " + user + " atsakymai:");
-        txtStatistics.setText(results.toString());
+        URL feedPanelUrl = StageController.class.getResource("/fxml/question_stats_panel.fxml");
+        for (int i = 0; i < 4; i++) {
+            Parent root = FXMLLoader.load(feedPanelUrl);
+            vboxFeed.getChildren().add(new VBox(root));
+        }
+//        vboxFeed.getChildren().add(new VBox(fakeRoot));
+//        txtStatistics.setText(results.toString());
     }
 
     private String buildComparativeString(double ratio, String comparativeSuffix) {
@@ -89,7 +103,7 @@ public class ResultController implements Initializable {
 
 
     public void btShowQuestionsClicked() throws IOException {
-        App.popUpQuestionReminder();
+        StageController.popUpQuestionReminder();
     }
 
     private void saveResults() {

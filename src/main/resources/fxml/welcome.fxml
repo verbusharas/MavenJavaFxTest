@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -8,15 +9,30 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lt.verbus.controller.WelcomeController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10.0" stylesheets="@default_theme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lt.verbus.controller.WelcomeController">
    <children>
-      <Text layoutX="187.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SUŽINOKITE SAVO ASMENYBĖS TIPĄ">
-         <font>
-            <Font size="21.0" />
-         </font>
-      </Text>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Užpildykite informaciją apie save ir spauskite pradėti" />
-      <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="SUŽINOK SAVO">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="10.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ASMENYBĖS TIPĄ">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Text>
+               </children>
+               <padding>
+                  <Insets bottom="2.0" left="20.0" right="20.0" top="5.0" />
+               </padding>
+            </VBox>
+         </children>
+      </HBox>
+      <VBox id="UserInfoVBox" alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
          <children>
             <Label fx:id="lblName" text="Vardas:" />
             <TextField fx:id="tfName" minHeight="-Infinity" minWidth="-Infinity" promptText="Vardas" />
@@ -32,28 +48,25 @@
                </VBox.margin>
             </Label>
             <TextField fx:id="tfCountry" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" promptText="Šalis" />
-            <HBox alignment="CENTER" prefHeight="37.0" prefWidth="418.0" spacing="5.0">
-               <children>
-                  <Button fx:id="btStartQuiz" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btStartQuizClicked" prefHeight="37.0" prefWidth="272.0" text="Pradėti">
-                     <padding>
-                        <Insets bottom="10.0" top="10.0" />
-                     </padding>
-                  </Button>
-                  <Button fx:id="btFakeLogin" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btFakeLoginClicked" prefHeight="37.0" prefWidth="115.0" text="O gal tu išgalvotas?">
-                     <padding>
-                        <Insets bottom="10.0" top="10.0" />
-                     </padding>
-                  </Button>
-               </children>
-               <padding>
-                  <Insets top="10.0" />
-               </padding>
-            </HBox>
          </children>
          <padding>
             <Insets left="100.0" right="100.0" />
          </padding>
       </VBox>
-      <Label fx:id="lblException" text="Exception Text" textFill="RED" />
+      <HBox alignment="CENTER" prefHeight="37.0" prefWidth="418.0" spacing="5.0">
+         <children>
+            <Button fx:id="btStartQuiz" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btStartQuizClicked" prefHeight="37.0" prefWidth="238.0" text="PRADĖTI">
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </Button>
+            <Button id="GameOfThronesButton" fx:id="btFakeLogin" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btFakeLoginClicked" prefHeight="37.0" prefWidth="158.0" text="O GAL TU IŠGALVOTAS?">
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </Button>
+         </children>
+      </HBox>
+      <Label id="ExceptionLabel" fx:id="lblException" text="Exception Text" textFill="RED" />
    </children>
 </VBox>

@@ -3,6 +3,7 @@ package lt.verbus.controller;
 import com.github.javafaker.Faker;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.text.Text;
 import javafx.util.StringConverter;
@@ -31,6 +32,9 @@ public class QuizController implements Initializable {
 
     @FXML
     private Text txtSliderIndicator;
+
+    @FXML
+    private Button btNextQuestion;
 
     private QuestionService questionService;
     private UserServiceSingleton userService;
@@ -83,7 +87,8 @@ public class QuizController implements Initializable {
         if (hasRemainingQuestions) {
             showNextQuestion();
         } else {
-            App.loadResultScreen();
+            btNextQuestion.setDisable(true);
+            StageController.loadResultScreen();
         }
     }
 

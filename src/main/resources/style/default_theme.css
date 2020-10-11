@@ -1,0 +1,97 @@
+{
+
+    black: #000000;
+    yellow: #fff600;
+    yellow_lighter: #fffca3;
+    yellow_transparent: rgba(255,246,0,0.8);
+    purple: rgba(86,64,100,1);
+    purple_lighter: rgba(100,80,114,1);
+    purple_transparent: rgba(86,64,100,0.8);
+
+    white: #ffffff;
+    bright_red: #ff635b;
+
+
+}
+
+.root {
+    -fx-background-image: url("background_image_welcome.jpg");
+}
+
+.button {
+    -fx-font: 12px Arial;
+    -fx-text-fill: black;
+    -fx-background-color: yellow_transparent;
+    -fx-background-radius: 0;
+}
+
+.button:hover {
+    -fx-background-color: yellow;
+}
+
+.button:pressed {
+    -fx-background-color: yellow_lighter;
+}
+
+.label {
+    -fx-font: 12px Arial;
+    -fx-text-fill: white;
+}
+
+#TitleText {
+    -fx-text-fill: white;
+}
+
+.text-field {
+    -fx-font: 12px Arial;
+    -fx-text-fill: white;
+    -fx-background-color: rgba(255,255,255,.5);
+    -fx-background-radius: 15;
+    -fx-border-color: white;
+    -fx-border-radius: 15;
+}
+
+.slider {
+    -slider-filled-track-color: yellow;
+    -slider-track-color: purple;
+}
+
+.slider .thumb {
+    -fx-background-image :url("your image");
+    -fx-background-color: -slider-filled-track-color ;
+}
+
+.slider .track {
+    -fx-background-color: -slider-track-color ;
+}
+
+.slider .axis .axis-tick-mark {
+    -fx-fill: null;
+    -fx-stroke: yellow;
+}
+
+.slider .axis {
+    -fx-tick-label-fill: yellow;
+    -fx-tick-label-font-weight: bold;
+}
+
+#UserInfoVBox {
+    -fx-background-color: linear-gradient(from 0% 50% to 100% 50%, rgba(86,64,100,0.6), rgba(50,26,66,0.6));
+}
+
+#GameOfThronesButton {
+    -fx-font: 12px Arial;
+    -fx-text-fill: white;
+    -fx-background-color: purple_transparent;
+}
+
+#GameOfThronesButton:hover {
+    -fx-background-color: purple;
+}
+#GameOfThronesButton:pressed {
+    -fx-background-color: purple_lighter;
+}
+
+#ExceptionLabel {
+    -fx-font-weight: bold;
+}

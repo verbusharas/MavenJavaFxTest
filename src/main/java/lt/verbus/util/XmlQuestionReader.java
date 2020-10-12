@@ -14,7 +14,7 @@ import java.util.List;
 
 public class XmlQuestionReader {
 
-    private String fileAddress;
+    private final String fileAddress;
 
     public XmlQuestionReader(String fileAddress) {
         this.fileAddress = fileAddress;
@@ -27,9 +27,12 @@ public class XmlQuestionReader {
 
         for (int i = 0; i < allQuestionNodes.getLength(); i++) {
             Node questionNode = allQuestionNodes.item(i);
-            String questionTextFromXmlNode = getQuestionParameterFromNodeByTag(questionNode, "text");
-            String questionAnswerFromXmlNode = getQuestionParameterFromNodeByTag(questionNode, "answer");
-            String questionAnswerRangeFromXmlNode = getQuestionParameterFromNodeByTag(questionNode, "answer_range");
+            String questionTextFromXmlNode =
+                    getQuestionParameterFromNodeByTag(questionNode, "text");
+            String questionAnswerFromXmlNode =
+                    getQuestionParameterFromNodeByTag(questionNode, "answer");
+            String questionAnswerRangeFromXmlNode =
+                    getQuestionParameterFromNodeByTag(questionNode, "answer_range");
 
             Question question = new Question();
             question.setId(i);
@@ -39,7 +42,6 @@ public class XmlQuestionReader {
 
             questions.add(question);
         }
-
         return questions;
     }
 
@@ -48,16 +50,17 @@ public class XmlQuestionReader {
         if (node.getNodeType() == Node.ELEMENT_NODE) {
             Element questionElement = (Element) node;
             questionParameter = questionElement
-                    .getElementsByTagName(questionInfoTag) //questionInfoTag examples: "text" / "answer" / "answer_range"
+                    //questionInfoTag examples: "text" / "answer" / "answer_range"
+                    .getElementsByTagName(questionInfoTag)
                     .item(0)
                     .getTextContent()
                     .trim()
-                    .replaceAll("[ ]{2,}", "\n"); //removes unnecessary whitespaces in question "text"
+                    //removes unnecessary whitespaces in question "text"
+                    .replaceAll("[ ]{2,}", "\n");
         }
         return questionParameter;
 
     }
-
 
     private NodeList getQuestionNodesByTag(String xmlTag) {
         NodeList nodes = null;
@@ -71,7 +74,6 @@ public class XmlQuestionReader {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return nodes;
     }
 

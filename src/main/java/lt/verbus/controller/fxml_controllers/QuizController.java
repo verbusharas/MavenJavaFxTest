@@ -1,4 +1,4 @@
-package lt.verbus.controller;
+package lt.verbus.controller.fxml_controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.text.Text;
 import javafx.util.StringConverter;
+import lt.verbus.controller.stage_controllers.StageController;
 import lt.verbus.domain.entity.Answer;
 import lt.verbus.domain.model.Question;
 import lt.verbus.service.QuestionService;

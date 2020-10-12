@@ -2,7 +2,7 @@ package lt.verbus;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import lt.verbus.controller.StageController;
+import lt.verbus.controller.stage_controllers.StageController;
 
 import java.io.IOException;
 

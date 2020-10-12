@@ -1,10 +1,10 @@
-package lt.verbus.controller;
+package lt.verbus.controller.fxml_controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.VBox;
+import lt.verbus.controller.custom_panels.AnswerStatsPanel;
 import lt.verbus.domain.entity.Answer;
-import lt.verbus.domain.entity.User;
 import lt.verbus.service.UserServiceSingleton;
 
 import java.net.URL;
@@ -18,7 +18,6 @@ public class ResultController implements Initializable {
 
     private UserServiceSingleton userServiceSingleton;
 
-    private User user;
     private List<Answer> userAnswers;
 
     @Override

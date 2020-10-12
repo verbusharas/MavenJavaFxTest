@@ -70,7 +70,10 @@ public class UserDao implements CrudRepository<User> {
      * @param <T> - object type to be constructed from database
      * @param <S> - object type the query parameters are based on
      */
-    protected <T, S> Query<T> createCustomQuery(CriteriaCustomizer<T> criteriaCustomizer, Class<T> resultClass, Class<S> sourceClass) {
+    protected <T, S> Query<T> createCustomQuery(CriteriaCustomizer<T> criteriaCustomizer,
+                                                Class<T> resultClass,
+                                                Class<S> sourceClass) {
+
         session = SessionFactoryUtil.getSession();
         builder = session.getCriteriaBuilder();
 
@@ -80,7 +83,5 @@ public class UserDao implements CrudRepository<User> {
         criteriaCustomizer.customize(criteria);
         return session.createQuery(criteria);
     }
-
-
 
 }

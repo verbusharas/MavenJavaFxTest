@@ -1,16 +1,15 @@
-package lt.verbus.controller;
+package lt.verbus.controller.fxml_controllers;
 
 import com.github.javafaker.Faker;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import lt.verbus.controller.stage_controllers.StageController;
 import lt.verbus.exception.EmptyFieldException;
 import lt.verbus.domain.entity.User;
 import lt.verbus.service.UserServiceSingleton;
 import lt.verbus.util.SessionFactoryUtil;
-import org.hibernate.Session;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,18 +17,6 @@ import java.util.ResourceBundle;
 
 
 public class WelcomeController implements Initializable {
-
-    @FXML
-    private Button btStartQuiz;
-
-    @FXML
-    private Label lblName;
-
-    @FXML
-    private Label lblCity;
-
-    @FXML
-    private Label lblCountry;
 
     @FXML
     private Label lblException;
@@ -46,7 +33,9 @@ public class WelcomeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         lblException.setVisible(false);
-        Session session = SessionFactoryUtil.getSession();
+
+        //For better performance - opens session before reaching results Scene
+        SessionFactoryUtil.getSession();
     }
 
     public void btStartQuizClicked() throws IOException {
@@ -70,7 +59,9 @@ public class WelcomeController implements Initializable {
     }
 
     private void validateTextFields() throws EmptyFieldException {
-        if (tfName.getText().length() < 1 || tfCity.getText().length() < 1 || tfCountry.getText().length() < 1) {
+        if (tfName.getText().length() < 1
+                || tfCity.getText().length() < 1
+                || tfCountry.getText().length() < 1) {
             throw new EmptyFieldException("Neskubėkite. Būtina užpildyti visus laukelius");
         }
     }
@@ -81,6 +72,5 @@ public class WelcomeController implements Initializable {
         tfCity.setText(faker.gameOfThrones().city());
         tfCountry.setText("Westeros");
     }
-
 
 }

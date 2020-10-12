@@ -1,4 +1,4 @@
-package lt.verbus.controller;
+package lt.verbus.controller.stage_controllers;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

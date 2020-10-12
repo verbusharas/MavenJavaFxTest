@@ -1,4 +1,4 @@
-package lt.verbus.controller;
+package lt.verbus.controller.custom_panels;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Hyperlink;
@@ -7,6 +7,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import lt.verbus.controller.stage_controllers.StageController;
 import lt.verbus.domain.entity.Answer;
 import lt.verbus.domain.model.Question;
 import lt.verbus.service.QuestionService;

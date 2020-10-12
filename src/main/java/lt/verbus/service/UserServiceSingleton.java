@@ -37,4 +37,9 @@ public class UserServiceSingleton {
     public void saveUser() {
         userDao.save(user);
     }
+
+    public void saveUser(User user) {
+        userDao.save(user);
+    }
+
 }

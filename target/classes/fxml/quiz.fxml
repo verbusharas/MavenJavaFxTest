@@ -2,9 +2,6 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -17,7 +14,7 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Text>
-            <Text fx:id="txtQuestion" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum a massa eu tortor lacinia cursus finibus ac sem. Morbi ac sapien ullamcorper, interdum urna nec, imperdiet libero. Nam scelerisque, augue eget viverra rhoncus, metus metus semper mi, ac commodo ante odio eget dui. Donec semper, sapien eu commodo suscipit, sapien." textAlignment="CENTER" wrappingWidth="549.0">
+            <Text fx:id="txtQuestion" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit." textAlignment="CENTER" wrappingWidth="549.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -37,7 +34,7 @@
             </Text>
          </children>
       </VBox>
-      <Slider fx:id="yearSlider" blockIncrement="5.0" majorTickUnit="10.0" max="2100.0" maxWidth="-Infinity" min="2020.0" minHeight="-Infinity" minWidth="-Infinity" minorTickCount="1" prefHeight="50.0" prefWidth="500.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="2060.0">
+      <Slider fx:id="yearSlider" blockIncrement="1.0" majorTickUnit="10.0" max="2100.0" maxWidth="-Infinity" min="2020.0" minHeight="-Infinity" minWidth="-Infinity" minorTickCount="9" prefHeight="50.0" prefWidth="500.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="2060.0">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>

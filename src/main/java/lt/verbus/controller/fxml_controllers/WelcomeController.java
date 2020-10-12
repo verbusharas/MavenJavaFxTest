@@ -62,7 +62,7 @@ public class WelcomeController implements Initializable {
         if (tfName.getText().length() < 1
                 || tfCity.getText().length() < 1
                 || tfCountry.getText().length() < 1) {
-            throw new EmptyFieldException("Neskubėkite. Būtina užpildyti visus laukelius");
+            throw new EmptyFieldException("Neskubėki. Būtina užpildyti visus laukelius");
         }
     }
 

@@ -43,7 +43,10 @@ public class AnswerStatsPanel extends HBox {
         setMinHeight(50);
         setSpacing(10);
         setPadding(new Insets(10,10,10,10));
-        setStyle("-fx-background-color: white;");
+        setStyle("-fx-background-color: transparent");
+        txtQuestionNumber.setStyle("-fx-fill: white; -fx-font-weight: bold");
+        txtUserAnswer.setStyle("-fx-fill: white");
+        txtCorrectAnswer.setStyle("-fx-fill: white");
     }
 
     private void injectServices() {

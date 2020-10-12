@@ -31,9 +31,9 @@ public class OverallStatsPanel extends HBox {
                 .compareUserAvgToOverallAvg(userServiceSingleton.getUser());
 
         StatsTextBuilder builder = new StatsTextBuilder();
-        builder.setPrefix("Tavo atsakymų vidurkis ");
+        builder.setPrefix("Tavo atsakymų vidurkis rodo, kad atsakinėjai ");
         builder.setRatio(ratioAgainstOverAllAvg);
-        builder.setSuffix("nei kitų apklausos dalyvių.");
+        builder.setSuffix("nei kiti apklausos dalyviai.");
 
         txtStatisticsAgainstOverallAvg = builder.build();
     }

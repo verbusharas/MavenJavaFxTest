@@ -11,10 +11,10 @@ import lt.verbus.domain.entity.Answer;
 import lt.verbus.domain.model.Question;
 import lt.verbus.service.QuestionService;
 import lt.verbus.service.UserServiceSingleton;
+import lt.verbus.util.PropertiesReader;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -42,8 +42,8 @@ public class QuizController implements Initializable {
     private int currentQuestionIndex;
     private int totalQuestions;
 
-    private int currentYear;
-    private int maxYear;
+    private int MIN_YEAR;
+    private int MAX_YEAR;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -61,12 +61,14 @@ public class QuizController implements Initializable {
     }
 
     private void formatYearSlider() {
-        currentYear = LocalDate.now().getYear();
-        maxYear = currentYear + 110;
+        PropertiesReader properties = new PropertiesReader();
+        MIN_YEAR = properties.getMinyear();
+        MAX_YEAR = properties.getMaxYear();
+        int increment = 1;
         yearSlider.valueProperty().addListener((obs, oldval, newVal) ->
-                txtSliderIndicator.setText(String.valueOf(5 * Math.round(newVal.doubleValue() / 5))));
-        yearSlider.minProperty().setValue(currentYear);
-        yearSlider.maxProperty().setValue(maxYear);
+                txtSliderIndicator.setText(String.valueOf(increment * Math.round(newVal.doubleValue() / increment))));
+        yearSlider.minProperty().setValue(MIN_YEAR);
+        yearSlider.maxProperty().setValue(MAX_YEAR);
         yearSlider.setLabelFormatter(new StringConverter<Double>() {
             @Override
             public String toString(Double n) {
@@ -101,8 +103,8 @@ public class QuizController implements Initializable {
     private void showNextQuestion() {
         Question question = questions.get(currentQuestionIndex);
         txtQuestion.setText(question.getText());
-        txtQuestionNumber.setText(String.format("Klausimas %d iš %d", currentQuestionIndex+1, totalQuestions));
-        yearSlider.setValue(currentYear);
+        txtQuestionNumber.setText(String.format("Klausimas %d iš %d", currentQuestionIndex + 1, totalQuestions));
+        yearSlider.setValue(MIN_YEAR);
     }
 
 

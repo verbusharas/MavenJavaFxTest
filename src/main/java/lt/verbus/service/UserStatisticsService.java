@@ -4,15 +4,23 @@ import lt.verbus.dao.UserStatisticsDao;
 import lt.verbus.domain.entity.Answer;
 import lt.verbus.domain.entity.User;
 import lt.verbus.domain.model.Question;
+import lt.verbus.util.PropertiesReader;
 
 public class UserStatisticsService {
 
     private final UserStatisticsDao userStatisticsDao;
     private final QuestionService questionService;
 
+    private int MAX_YEAR;
+    private int MIN_YEAR;
+
     public UserStatisticsService() {
         questionService = new QuestionService();
         userStatisticsDao = new UserStatisticsDao();
+        PropertiesReader properties = new PropertiesReader();
+        MAX_YEAR = properties.getMaxYear();
+        MIN_YEAR = properties.getMinyear();
+
     }
 
     public UserStatisticsService(UserStatisticsDao userStatisticsDao, QuestionService questionService) {
@@ -67,15 +75,11 @@ public class UserStatisticsService {
     }
 
     private int getMaxPossibleDifFromAvg() {
-        final int MAX = 2130;
-        final int MIN = 2020;
-        return MAX - MIN;
+        return MAX_YEAR - MIN_YEAR;
     }
 
     private int getMaxPossibleDifFromCorrect(int correctAnswer) {
-        final int MAX = 2130;
-        final int MIN = 2020;
-        return Math.max(MAX - correctAnswer, correctAnswer - MIN);
+        return Math.max(MAX_YEAR - correctAnswer, correctAnswer - MIN_YEAR);
     }
 
 }

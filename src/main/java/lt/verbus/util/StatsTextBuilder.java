@@ -34,6 +34,10 @@ public class StatsTextBuilder {
         Text txtPercentage = new Text();
         Text txtSuffix = new Text();
 
+        txtPrefix.setStyle("-fx-fill: white");
+        txtSuffix.setStyle("-fx-fill: white");
+
+
         TextFlow statisticalText = new TextFlow();
         statisticalText.getChildren().add(0, txtPrefix);
         statisticalText.getChildren().add(1, txtPercentage);
@@ -41,13 +45,13 @@ public class StatsTextBuilder {
 
         int roundedRatio = (int) Math.round(ratio * 100);
         if (roundedRatio > 0) {
-            txtPercentage.setFill(Color.RED);
+            txtPercentage.setStyle("-fx-fill: #d54b3c");
             txtPercentage.setText("▼ " + Math.abs(roundedRatio) + "%");
-            txtSuffix.setText(" pesimistiškesnis nei " + suffix);
+            txtSuffix.setText(" pesimistiškiau nei " + suffix);
         } else if (roundedRatio < 0) {
-            txtPercentage.setFill(Color.GREEN);
+            txtPercentage.setStyle("-fx-fill: #fff600");
             txtPercentage.setText("▲ " + Math.abs(roundedRatio) + "%");
-            txtSuffix.setText(" optimistiškenis nei " + suffix);
+            txtSuffix.setText(" optimistiškiau nei " + suffix);
         } else {
             txtPercentage.setText("▬");
             txtSuffix.setText("manai lygiai taip, kaip ir " + suffix);

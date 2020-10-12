@@ -36,6 +36,7 @@ public class StageController {
 
     public static void loadResultScreen() throws IOException {
         Parent resultRoot = FXMLLoader.load(StageController.class.getResource("/fxml/result.fxml"));
+        resultRoot.getStylesheets().add(StageController.class.getResource("/style/default_theme.css").toExternalForm());
         primaryStage.setScene(new Scene(resultRoot));
     }
 

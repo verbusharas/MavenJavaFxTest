@@ -11,21 +11,9 @@
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10.0" stylesheets="@default_theme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lt.verbus.controller.fxml_controllers.WelcomeController">
    <children>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox prefHeight="81.0" prefWidth="600.0">
          <children>
             <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="SUŽINOK SAVO">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Text>
-                  <Text fill="WHITE" layoutX="10.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ASMENYBĖS TIPĄ">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Text>
-               </children>
                <padding>
                   <Insets bottom="2.0" left="20.0" right="20.0" top="5.0" />
                </padding>
@@ -34,6 +22,20 @@
       </HBox>
       <VBox id="UserInfoVBox" alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
          <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="SUŽINOK SAVO">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="ASMENYBĖS TIPĄ">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
             <Label fx:id="lblName" text="Vardas:" />
             <TextField fx:id="tfName" minHeight="-Infinity" minWidth="-Infinity" promptText="Vardas" />
             <Label fx:id="lblCity" text="Miestas:">
@@ -66,6 +68,9 @@
                </padding>
             </Button>
          </children>
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
       </HBox>
       <Label id="ExceptionLabel" fx:id="lblException" text="Exception Text" textFill="RED" />
    </children>

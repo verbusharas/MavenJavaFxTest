@@ -1,13 +1,11 @@
 package lt.verbus.controller;
 
-import com.github.javafaker.Faker;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.text.Text;
 import javafx.util.StringConverter;
-import lt.verbus.App;
 import lt.verbus.domain.entity.Answer;
 import lt.verbus.domain.model.Question;
 import lt.verbus.service.QuestionService;
@@ -40,7 +38,7 @@ public class QuizController implements Initializable {
     private UserServiceSingleton userService;
 
     List<Question> questions;
-    private int currentQuestionNo;
+    private int currentQuestionIndex;
     private int totalQuestions;
 
     private int currentYear;
@@ -50,7 +48,7 @@ public class QuizController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         injectServices();
         questions = questionService.findAll();
-        currentQuestionNo = 0;
+        currentQuestionIndex = 0;
         totalQuestions = questions.size();
         formatYearSlider();
         showNextQuestion();
@@ -83,7 +81,7 @@ public class QuizController implements Initializable {
 
     public void btNextQuestionClicked() throws IOException {
         setUserAnswer(Integer.parseInt(txtSliderIndicator.getText()));
-        boolean hasRemainingQuestions = ++currentQuestionNo < totalQuestions;
+        boolean hasRemainingQuestions = ++currentQuestionIndex < totalQuestions;
         if (hasRemainingQuestions) {
             showNextQuestion();
         } else {
@@ -94,15 +92,15 @@ public class QuizController implements Initializable {
 
     private void setUserAnswer(int userAnswerValue) {
         Answer userAnswer = new Answer();
-        userAnswer.setQuestionNumber(currentQuestionNo);
+        userAnswer.setQuestionIndex(currentQuestionIndex);
         userAnswer.setAnswer(userAnswerValue);
         userService.addAnswer(userAnswer);
     }
 
     private void showNextQuestion() {
-        Question question = questions.get(currentQuestionNo);
+        Question question = questions.get(currentQuestionIndex);
         txtQuestion.setText(question.getText());
-        txtQuestionNumber.setText(String.format("Klausimas %d iš %d", currentQuestionNo+1, totalQuestions));
+        txtQuestionNumber.setText(String.format("Klausimas %d iš %d", currentQuestionIndex+1, totalQuestions));
         yearSlider.setValue(currentYear);
     }
 

@@ -18,7 +18,10 @@ public class SessionFactoryUtil {
 
     public static Session getSession()  {
         if (session == null || !session.isOpen()) {
-            session = SessionFactoryUtil.getFactory().openSession();
+            Runnable persistance =
+                    () -> session = SessionFactoryUtil.getFactory().openSession();
+            Thread sessionOpeningThread = new Thread(persistance);
+            sessionOpeningThread.start();
         }
         return session;
     }

@@ -19,8 +19,8 @@ public class Answer {
     @ManyToOne
     private User user;
 
-    @Column(name = "question_number")
-    private int questionNumber;
+    @Column(name = "question_index")
+    private int questionIndex;
 
     private int answer;
 
@@ -35,12 +35,12 @@ public class Answer {
         this.user = user;
     }
 
-    public int getQuestionNumber() {
-        return questionNumber;
+    public int getQuestionIndex() {
+        return questionIndex;
     }
 
-    public void setQuestionNumber(int question) {
-        this.questionNumber = question;
+    public void setQuestionIndex(int question) {
+        this.questionIndex = question;
     }
 
     public int getAnswer() {

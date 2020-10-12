@@ -37,7 +37,6 @@ public class StageController {
     public static void loadResultScreen() throws IOException {
         Parent resultRoot = FXMLLoader.load(StageController.class.getResource("/fxml/result.fxml"));
         primaryStage.setScene(new Scene(resultRoot));
-        System.out.println("switching to results");
     }
 
     public static void popUpQuestionReminder() throws IOException {

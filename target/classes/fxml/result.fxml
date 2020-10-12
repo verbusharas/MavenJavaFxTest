@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -14,7 +15,9 @@
             <Font size="17.0" />
          </font>
       </Text>
-      <VBox fx:id="vboxFeed" prefHeight="200.0" prefWidth="100.0" />
-      <Button fx:id="btShowQuestions" mnemonicParsing="false" onAction="#btShowQuestionsClicked" text="Pamiršai klausimus?" />
+      <VBox fx:id="vboxFeed" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+         <padding>
+            <Insets left="20.0" right="20.0" />
+         </padding></VBox>
    </children>
 </VBox>

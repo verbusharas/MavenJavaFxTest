@@ -46,7 +46,7 @@ public class UserDao implements CrudRepository<User> {
             transaction = session.beginTransaction();
             session.save(user);
             transaction.commit();
-            System.out.println("user saved");
+            System.out.println("User saved");
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();

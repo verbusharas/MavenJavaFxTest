@@ -17,7 +17,7 @@ public class UserStatisticsDao extends UserDao {
         CriteriaCustomizer<Double> criteriaCustomizer =
                 (criteria) -> {
                     criteria.select(builder.avg(sourceRoot.get("answer"))).where(
-                            builder.equal(sourceRoot.get("questionNumber"), questionIndex)
+                            builder.equal(sourceRoot.get("questionIndex"), questionIndex)
                     );
                     return criteria;
                 };

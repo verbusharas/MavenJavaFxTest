@@ -9,6 +9,8 @@ import javafx.scene.control.TextField;
 import lt.verbus.exception.EmptyFieldException;
 import lt.verbus.domain.entity.User;
 import lt.verbus.service.UserServiceSingleton;
+import lt.verbus.util.SessionFactoryUtil;
+import org.hibernate.Session;
 
 import java.io.IOException;
 import java.net.URL;
@@ -44,6 +46,7 @@ public class WelcomeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         lblException.setVisible(false);
+        Session session = SessionFactoryUtil.getSession();
     }
 
     public void btStartQuizClicked() throws IOException {

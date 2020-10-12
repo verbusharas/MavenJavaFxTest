@@ -6,8 +6,6 @@ import lt.verbus.domain.model.Question;
 import org.junit.Before;
 import org.mockito.Mockito;
 
-import static org.mockito.Mockito.atLeast;
-
 public class UserStatisticsServiceTest extends TestCase {
 
     private UserStatisticsService userStatisticsService;
@@ -20,27 +18,27 @@ public class UserStatisticsServiceTest extends TestCase {
     }
 
     public void testCompareUserAnswerToAverageAnswer() {
-        Mockito.when(userStatisticsDao.getAverageAnswerValueByQuestionIndex(0))
+        Mockito.when(userStatisticsDao.getAvgSingleAnswerValueByQuestionIndex(0))
                 .thenReturn(2025.0);
-        Mockito.when(userStatisticsDao.getAverageAnswerValueByQuestionIndex(1))
+        Mockito.when(userStatisticsDao.getAvgSingleAnswerValueByQuestionIndex(1))
                 .thenReturn(2050.0);
-        Mockito.when(userStatisticsDao.getAverageAnswerValueByQuestionIndex(2))
+        Mockito.when(userStatisticsDao.getAvgSingleAnswerValueByQuestionIndex(2))
                 .thenReturn(2070.0);
 
-        double ratioWhenEquals = userStatisticsService.compareUserAnswerToAverageAnswer
+        double ratioWhenEquals = userStatisticsService.compareUserAnswerToSingleAvg
                 (0, 2025);
-        double ratioWhenLess = userStatisticsService.compareUserAnswerToAverageAnswer
+        double ratioWhenLess = userStatisticsService.compareUserAnswerToSingleAvg
                 (1, 2025);
-        double ratioWhenMore = userStatisticsService.compareUserAnswerToAverageAnswer
+        double ratioWhenMore = userStatisticsService.compareUserAnswerToSingleAvg
                 (2, 2080);
 
         assertEquals(0.0, ratioWhenEquals);
         assertEquals(-25.0/110, ratioWhenLess);
         assertEquals(10.0/110, ratioWhenMore);
 
-        Mockito.verify(userStatisticsDao).getAverageAnswerValueByQuestionIndex(0);
-        Mockito.verify(userStatisticsDao).getAverageAnswerValueByQuestionIndex(1);
-        Mockito.verify(userStatisticsDao).getAverageAnswerValueByQuestionIndex(2);
+        Mockito.verify(userStatisticsDao).getAvgSingleAnswerValueByQuestionIndex(0);
+        Mockito.verify(userStatisticsDao).getAvgSingleAnswerValueByQuestionIndex(1);
+        Mockito.verify(userStatisticsDao).getAvgSingleAnswerValueByQuestionIndex(2);
     }
 
     public void testCompareUserAnswerToCorrectAnswer() {
@@ -77,29 +75,29 @@ public class UserStatisticsServiceTest extends TestCase {
     }
 
     public void testCompareUserAverageToOverallAverage() {
-        Mockito.when(userStatisticsDao.getAverageAnswerValueByUserId(0))
+        Mockito.when(userStatisticsDao.getUserAverageAnswerValue(0))
                 .thenReturn(2025.0);
-        Mockito.when(userStatisticsDao.getAverageAnswerValueByUserId(1))
+        Mockito.when(userStatisticsDao.getUserAverageAnswerValue(1))
                 .thenReturn(2030.0);
-        Mockito.when(userStatisticsDao.getAverageAnswerValueByUserId(2))
+        Mockito.when(userStatisticsDao.getUserAverageAnswerValue(2))
                 .thenReturn(2035.0);
 
-        Mockito.when(userStatisticsDao.getAverageAnswerValue())
+        Mockito.when(userStatisticsDao.getAvgAnswerValue())
                 .thenReturn(2030.0);
 
-        double ratioWhenLess = userStatisticsService.compareUserAverageToOverallAverage(0);
-        double ratioWhenEquals = userStatisticsService.compareUserAverageToOverallAverage(1);
-        double ratioWhenMore = userStatisticsService.compareUserAverageToOverallAverage(2);
+        double ratioWhenLess = userStatisticsService.compareUserAvgToOverallAvg(0);
+        double ratioWhenEquals = userStatisticsService.compareUserAvgToOverallAvg(1);
+        double ratioWhenMore = userStatisticsService.compareUserAvgToOverallAvg(2);
 
         assertEquals(-5.0/110, ratioWhenLess);
         assertEquals(0.0, ratioWhenEquals);
         assertEquals(5.0/110, ratioWhenMore);
 
-        Mockito.verify(userStatisticsDao).getAverageAnswerValueByUserId(0);
-        Mockito.verify(userStatisticsDao).getAverageAnswerValueByUserId(1);
-        Mockito.verify(userStatisticsDao).getAverageAnswerValueByUserId(2);
+        Mockito.verify(userStatisticsDao).getUserAverageAnswerValue(0);
+        Mockito.verify(userStatisticsDao).getUserAverageAnswerValue(1);
+        Mockito.verify(userStatisticsDao).getUserAverageAnswerValue(2);
 
-        Mockito.verify(userStatisticsDao, Mockito.atLeast(3)).getAverageAnswerValue();
+        Mockito.verify(userStatisticsDao, Mockito.atLeast(3)).getAvgAnswerValue();
     }
 
 

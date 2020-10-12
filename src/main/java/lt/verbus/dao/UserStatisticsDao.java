@@ -4,7 +4,7 @@ import lt.verbus.domain.entity.Answer;
 
 public class UserStatisticsDao extends UserDao {
 
-    public Double getAverageAnswerValue() {
+    public Double getAvgAnswerValue() {
         CriteriaCustomizer<Double> criteriaCustomizer =
                 (criteria) -> {
                     criteria.select(builder.avg(sourceRoot.get("answer")));
@@ -13,7 +13,7 @@ public class UserStatisticsDao extends UserDao {
         return super.createCustomQuery(criteriaCustomizer, Double.class, Answer.class).getSingleResult();
     }
 
-    public Double getAverageAnswerValueByQuestionIndex(int questionIndex) {
+    public Double getAvgSingleAnswerValueByQuestionIndex(int questionIndex) {
         CriteriaCustomizer<Double> criteriaCustomizer =
                 (criteria) -> {
                     criteria.select(builder.avg(sourceRoot.get("answer"))).where(
@@ -24,7 +24,7 @@ public class UserStatisticsDao extends UserDao {
         return super.createCustomQuery(criteriaCustomizer, Double.class, Answer.class).getSingleResult();
     }
 
-    public Double getAverageAnswerValueByUserId(int userId) {
+    public Double getUserAverageAnswerValue(int userId) {
         CriteriaCustomizer<Double> criteriaCustomizer =
                 (criteria) -> {
                     criteria.select(builder.avg(sourceRoot.get("answer"))).where(

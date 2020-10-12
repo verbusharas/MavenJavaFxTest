@@ -12,6 +12,7 @@ import lt.verbus.domain.entity.Answer;
 import lt.verbus.domain.model.Question;
 import lt.verbus.service.QuestionService;
 import lt.verbus.service.UserStatisticsService;
+import lt.verbus.util.StatsTextBuilder;
 
 import java.io.IOException;
 
@@ -71,11 +72,17 @@ public class AnswerStatsPanel extends HBox {
         double ratioAgainstCorrect = userStatisticsService
                 .compareUserAnswerToCorrectAnswer(questionIndex, userAnswer.getAnswer());
         double ratioAgainstSingleAvg = userStatisticsService
-                .compareUserAnswerToAverageAnswer(questionIndex, userAnswer.getAnswer());
-        txtStatisticsAgainstCorrect =
-                buildStatisticalText(ratioAgainstCorrect, "prognozuojama.");
-        txtStatisticsAgainstSingleAvg =
-                buildStatisticalText(ratioAgainstSingleAvg, "dauguma vartotojų.");
+                .compareUserAnswerToSingleAvg(questionIndex, userAnswer.getAnswer());
+
+        StatsTextBuilder builder = new StatsTextBuilder();
+
+        builder.setRatio(ratioAgainstCorrect);
+        builder.setSuffix("prognozuojama.");
+        txtStatisticsAgainstCorrect = builder.build();
+
+        builder.setRatio(ratioAgainstSingleAvg);
+        builder.setSuffix("dauguma vartotojų.");
+        txtStatisticsAgainstSingleAvg = builder.build();
     }
 
     private void btRemindQuestionClicked() {
@@ -96,27 +103,6 @@ public class AnswerStatsPanel extends HBox {
         statsColumn.getChildren().addAll(txtStatisticsAgainstCorrect, txtStatisticsAgainstSingleAvg);
 
         getChildren().addAll(questionColumn, answerColumn, statsColumn);
-    }
-
-    private TextFlow buildStatisticalText(double ratio, String comparativeSuffix) {
-
-        Text percentage = new Text();
-        Text comparativeString = new Text();
-
-        int roundedRatio = (int) Math.round(ratio * 100);
-        if (roundedRatio > 0) {
-            percentage.setFill(Color.RED);
-            percentage.setText("▼ " + Math.abs(roundedRatio) + "%");
-            comparativeString.setText(" pesimistiškesnis nei " + comparativeSuffix);
-        } else if (roundedRatio < 0) {
-            percentage.setFill(Color.GREEN);
-            percentage.setText("▲ " + Math.abs(roundedRatio) + "%");
-            comparativeString.setText(" optimistiškenis nei " + comparativeSuffix);
-        } else {
-            percentage.setText("▬");
-            comparativeString.setText("manai lygiai taip, kaip ir " + comparativeSuffix);
-        }
-        return new TextFlow(percentage, comparativeString);
     }
 
 }

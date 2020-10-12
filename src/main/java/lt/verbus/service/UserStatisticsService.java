@@ -1,6 +1,8 @@
 package lt.verbus.service;
 
 import lt.verbus.dao.UserStatisticsDao;
+import lt.verbus.domain.entity.Answer;
+import lt.verbus.domain.entity.User;
 import lt.verbus.domain.model.Question;
 
 public class UserStatisticsService {
@@ -18,20 +20,20 @@ public class UserStatisticsService {
         this.questionService = questionService;
     }
 
-    public Double getAverageAnswerValue() {
-        return userStatisticsDao.getAverageAnswerValue();
+    public Double getOverallAvgAnswerValue() {
+        return userStatisticsDao.getAvgAnswerValue();
     }
 
-    public Double getAverageAnswerValueByQuestionIndex(int questionIndex) {
-        return userStatisticsDao.getAverageAnswerValueByQuestionIndex(questionIndex);
+    public Double getAvgSingleAnswerValueByQuestionIndex(int questionIndex) {
+        return userStatisticsDao.getAvgSingleAnswerValueByQuestionIndex(questionIndex);
     }
 
-    public Double getAverageAnswerValueByUserId(int userId) {
-        return userStatisticsDao.getAverageAnswerValueByUserId(userId);
+    public Double getUserAvgAnswerValue(int userId) {
+        return userStatisticsDao.getUserAverageAnswerValue(userId);
     }
 
-    public double compareUserAnswerToAverageAnswer(int questionIndex, int userAnswer) {
-        double avgAnswer = getAverageAnswerValueByQuestionIndex(questionIndex);
+    public double compareUserAnswerToSingleAvg(int questionIndex, int userAnswer) {
+        double avgAnswer = getAvgSingleAnswerValueByQuestionIndex(questionIndex);
         double actualDif = userAnswer - avgAnswer;
         double maxDif = getMaxPossibleDifFromAvg();
         return actualDif / maxDif;
@@ -45,9 +47,20 @@ public class UserStatisticsService {
         return actualDif / maxDif;
     }
 
-    public double compareUserAverageToOverallAverage(int userId) {
-        double userAvg = getAverageAnswerValueByUserId(userId);
-        double overallAvg = getAverageAnswerValue();
+    public double compareUserAvgToOverallAvg(int userId) {
+        double userAvg = getUserAvgAnswerValue(userId);
+        return getOverallRatio(userAvg);
+    }
+
+    public double compareUserAvgToOverallAvg(User user) {
+        double sum = user.getAnswers().stream().mapToInt(Answer::getAnswer).sum();
+        double entries = user.getAnswers().size();
+        double userAvg = sum / entries;
+        return getOverallRatio(userAvg);
+    }
+
+    private double getOverallRatio(double userAvg) {
+        double overallAvg = getOverallAvgAnswerValue();
         double actualDif = userAvg - overallAvg;
         double maxDif = getMaxPossibleDifFromAvg();
         return actualDif / maxDif;

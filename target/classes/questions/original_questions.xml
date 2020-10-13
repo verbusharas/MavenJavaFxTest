@@ -40,4 +40,12 @@
         <answer>2022</answer>
         <answer_range>0</answer_range>
     </question>
+    <question>
+        <text>
+            1956 m. IBM pristatė pirmą komercinį kietajį diską RAMAC 350.
+            Kaip manote, kada asmeniniai duomenys tilps į degtuko galvutės dydžio kristalą ir nebereiks saugoti duomenų Google, Dropbox ir kt.?
+        </text>
+        <answer>2022</answer>
+        <answer_range>0</answer_range>
+    </question>
 </main>

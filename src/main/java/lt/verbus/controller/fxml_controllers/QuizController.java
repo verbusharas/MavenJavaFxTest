@@ -10,7 +10,7 @@ import lt.verbus.controller.stage_controllers.StageController;
 import lt.verbus.domain.entity.Answer;
 import lt.verbus.domain.model.Question;
 import lt.verbus.service.QuestionService;
-import lt.verbus.service.UserServiceSingleton;
+import lt.verbus.service.CurrentUserService;
 import lt.verbus.util.PropertiesReader;
 
 import java.io.IOException;
@@ -36,7 +36,7 @@ public class QuizController implements Initializable {
     private Button btNextQuestion;
 
     private QuestionService questionService;
-    private UserServiceSingleton userService;
+    private CurrentUserService userService;
 
     List<Question> questions;
     private int currentQuestionIndex;
@@ -57,7 +57,7 @@ public class QuizController implements Initializable {
 
     private void injectServices() {
         questionService = new QuestionService();
-        userService = UserServiceSingleton.getInstance();
+        userService = CurrentUserService.getInstance();
     }
 
     private void formatYearSlider() {
@@ -106,6 +106,4 @@ public class QuizController implements Initializable {
         txtQuestionNumber.setText(String.format("Klausimas %d iš %d", currentQuestionIndex + 1, totalQuestions));
         yearSlider.setValue(MIN_YEAR);
     }
-
-
 }

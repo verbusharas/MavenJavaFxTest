@@ -8,24 +8,39 @@
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="5.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lt.verbus.controller.fxml_controllers.ResultController">
    <children>
-      <Text fx:id="txtUserInfo" layoutX="299.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Text>
+      <VBox fx:id="vboxFeed" prefHeight="71.0" prefWidth="600.0" spacing="10.0">
+         <padding>
+            <Insets left="20.0" right="20.0" />
+         </padding></VBox>
+      <HBox fx:id="forLayout" prefHeight="150.0" prefWidth="600.0" />
+      <HBox alignment="CENTER" prefHeight="32.0" prefWidth="600.0" spacing="10.0">
+         <children>
+            <Text fx:id="txtUserInfo" strokeType="OUTSIDE" strokeWidth="0.0" text="User">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Text>
+            <Text fx:id="txtUserPortrait" layoutX="293.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Text>
+         </children>
+      </HBox>
       <VBox fx:id="vboxFeedTitle" layoutX="10.0" layoutY="124.0" prefHeight="30.0" prefWidth="600.0" spacing="10.0">
          <padding>
             <Insets left="20.0" right="20.0" />
          </padding>
       </VBox>
-      <VBox fx:id="vboxFeed" prefHeight="118.0" prefWidth="600.0" spacing="10.0">
-         <padding>
-            <Insets left="20.0" right="20.0" />
-         </padding></VBox>
-      <ScrollPane fx:id="scrollFeed" prefHeight="137.0" prefWidth="600.0">
+      <ScrollPane fx:id="scrollFeed" prefHeight="290.0" prefWidth="600.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
         </content>
       </ScrollPane>
+      <VBox fx:id="vboxFeed1" layoutX="10.0" layoutY="26.0" prefHeight="71.0" prefWidth="600.0" spacing="10.0">
+         <padding>
+            <Insets left="20.0" right="20.0" />
+         </padding>
+      </VBox>
    </children>
 </VBox>

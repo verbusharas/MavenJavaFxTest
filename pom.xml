@@ -20,6 +20,17 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>16-ea+2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>16-ea+2</version>
+        </dependency>
 
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -33,17 +44,6 @@
             <version>8.0.21</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-controls</artifactId>
-            <version>16-ea+2</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-fxml</artifactId>
-            <version>16-ea+2</version>
-        </dependency>
 
         <dependency>
             <groupId>com.github.javafaker</groupId>

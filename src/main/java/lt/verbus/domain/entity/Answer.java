@@ -27,6 +27,10 @@ public class Answer {
     public Answer() {
     }
 
+    public Answer(int answer) {
+        this.answer = answer;
+    }
+
     public User getUser() {
         return user;
     }

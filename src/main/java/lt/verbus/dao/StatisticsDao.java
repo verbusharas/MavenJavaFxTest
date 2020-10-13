@@ -2,9 +2,9 @@ package lt.verbus.dao;
 
 import lt.verbus.domain.entity.Answer;
 
-public class UserStatisticsDao extends UserDao {
+public class StatisticsDao extends UserDao {
 
-    public Double getAvgAnswerValue() {
+    public Double getOverallAvgAnswerValue() {
         CriteriaCustomizer<Double> criteriaCustomizer =
                 (criteria) -> {
                     criteria.select(builder.avg(sourceRoot.get("answer")));

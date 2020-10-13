@@ -4,21 +4,21 @@ import lt.verbus.domain.entity.Answer;
 import lt.verbus.domain.entity.User;
 import lt.verbus.dao.UserDao;
 
-public class UserServiceSingleton {
+public class CurrentUserService {
 
     private User user;
-    private static UserServiceSingleton userServiceSingleton;
+    private static CurrentUserService currentUserService;
     private final UserDao userDao;
 
-    private UserServiceSingleton() {
+    private CurrentUserService() {
         userDao = new UserDao();
     }
 
-    public static UserServiceSingleton getInstance() {
-        if (userServiceSingleton == null) {
-            userServiceSingleton = new UserServiceSingleton();
+    public static CurrentUserService getInstance() {
+        if (currentUserService == null) {
+            currentUserService = new CurrentUserService();
         }
-        return userServiceSingleton;
+        return currentUserService;
     }
 
     public void setUser(User user) {

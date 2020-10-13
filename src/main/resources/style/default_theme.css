@@ -93,6 +93,11 @@
     -fx-fill: white;
 }
 
+#txtUserPortrait {
+    -fx-fill: yellow;
+    -fx-font-weight: bold;
+}
+
 #TitleText {
     -fx-text-fill: white;
 }

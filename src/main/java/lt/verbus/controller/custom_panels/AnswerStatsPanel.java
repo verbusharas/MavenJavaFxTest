@@ -4,14 +4,13 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import lt.verbus.controller.stage_controllers.StageController;
 import lt.verbus.domain.entity.Answer;
 import lt.verbus.domain.model.Question;
 import lt.verbus.service.QuestionService;
-import lt.verbus.service.UserStatisticsService;
+import lt.verbus.service.StatisticsService;
 import lt.verbus.util.StatsTextBuilder;
 
 import java.io.IOException;
@@ -21,7 +20,7 @@ public class AnswerStatsPanel extends HBox {
     private final Answer userAnswer;
 
     private QuestionService questionService;
-    private UserStatisticsService userStatisticsService;
+    private StatisticsService statisticsService;
 
     private Text txtQuestionNumber;
     private Text txtUserAnswer;
@@ -51,7 +50,7 @@ public class AnswerStatsPanel extends HBox {
 
     private void injectServices() {
         questionService = new QuestionService();
-        userStatisticsService = new UserStatisticsService();
+        statisticsService = new StatisticsService();
     }
 
     private void injectNodes() {
@@ -66,16 +65,16 @@ public class AnswerStatsPanel extends HBox {
         Question question = questionService.getQuestionByIndex(questionIndex);
 
         txtQuestionNumber.setText("KLAUSIME NR. " + (questionIndex + 1));
-        btRemindQuestion.setText("Pamiršai klausimą?");
+        btRemindQuestion.setText("Priminti klausimą?");
         btRemindQuestion.setOnAction(e -> btRemindQuestionClicked());
 
-        txtUserAnswer.setText("Tu pasirinkai: " + userAnswer.getAnswer());
+        txtUserAnswer.setText("Pasirinkai: " + userAnswer.getAnswer());
         txtCorrectAnswer.setText("Mes prognozuojame: " + question.getCorrectAnswer());
 
-        double ratioAgainstCorrect = userStatisticsService
-                .compareUserAnswerToCorrectAnswer(questionIndex, userAnswer.getAnswer());
-        double ratioAgainstSingleAvg = userStatisticsService
-                .compareUserAnswerToSingleAvg(questionIndex, userAnswer.getAnswer());
+        double ratioAgainstCorrect = statisticsService
+                .compareUserAnswerToCorrectAnswer(userAnswer);
+        double ratioAgainstSingleAvg = statisticsService
+                .compareUserAnswerToSingleAvg(userAnswer);
 
         StatsTextBuilder builder = new StatsTextBuilder();
 

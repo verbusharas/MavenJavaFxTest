@@ -8,13 +8,12 @@ import javafx.scene.control.TextField;
 import lt.verbus.controller.stage_controllers.StageController;
 import lt.verbus.exception.EmptyFieldException;
 import lt.verbus.domain.entity.User;
-import lt.verbus.service.UserServiceSingleton;
+import lt.verbus.service.CurrentUserService;
 import lt.verbus.util.SessionFactoryUtil;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 
 public class WelcomeController implements Initializable {
 
@@ -54,8 +53,8 @@ public class WelcomeController implements Initializable {
         currentUser.setName(tfName.getText());
         currentUser.setCity(tfCity.getText());
         currentUser.setCountry(tfCountry.getText());
-        UserServiceSingleton userServiceSingleton = UserServiceSingleton.getInstance();
-        userServiceSingleton.setUser(currentUser);
+        CurrentUserService currentUserService = CurrentUserService.getInstance();
+        currentUserService.setUser(currentUser);
     }
 
     private void validateTextFields() throws EmptyFieldException {

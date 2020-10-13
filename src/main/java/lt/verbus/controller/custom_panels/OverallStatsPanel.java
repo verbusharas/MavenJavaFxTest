@@ -3,14 +3,14 @@ package lt.verbus.controller.custom_panels;
 import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.TextFlow;
-import lt.verbus.service.UserServiceSingleton;
-import lt.verbus.service.UserStatisticsService;
+import lt.verbus.service.CurrentUserService;
+import lt.verbus.service.StatisticsService;
 import lt.verbus.util.StatsTextBuilder;
 
 public class OverallStatsPanel extends HBox {
 
-    private UserStatisticsService userStatisticsService;
-    private UserServiceSingleton userServiceSingleton;
+    private StatisticsService statisticsService;
+    private CurrentUserService currentUserService;
 
     private TextFlow txtStatisticsAgainstOverallAvg;
 
@@ -22,13 +22,13 @@ public class OverallStatsPanel extends HBox {
     }
 
     private void injectServices() {
-        userStatisticsService = new UserStatisticsService();
-        userServiceSingleton = UserServiceSingleton.getInstance();
+        statisticsService = new StatisticsService();
+        currentUserService = CurrentUserService.getInstance();
     }
 
     private void setNodeValues() {
-        double ratioAgainstOverAllAvg = userStatisticsService
-                .compareUserAvgToOverallAvg(userServiceSingleton.getUser());
+        double ratioAgainstOverAllAvg = statisticsService
+                .compareUserAvgToOverallAvg(currentUserService.getUser());
 
         StatsTextBuilder builder = new StatsTextBuilder();
         builder.setPrefix("Tavo atsakymų vidurkis rodo, kad atsakinėjai ");
@@ -42,12 +42,10 @@ public class OverallStatsPanel extends HBox {
         setMinHeight(25);
         setSpacing(10);
         setPadding(new Insets(10, 10, 10, 10));
-        setStyle("-fx-background-color: white;");
+        setStyle("-fx-background-color: transparent;");
     }
 
     private void populatePanelWithNodes() {
         getChildren().add(txtStatisticsAgainstOverallAvg);
     }
-
-
 }

@@ -9,7 +9,8 @@ import lt.verbus.controller.custom_panels.AnswerStatsPanel;
 import lt.verbus.controller.custom_panels.OverallStatsPanel;
 import lt.verbus.domain.entity.Answer;
 import lt.verbus.domain.entity.User;
-import lt.verbus.service.UserServiceSingleton;
+import lt.verbus.service.CurrentUserService;
+import lt.verbus.service.StatisticsService;
 
 import java.net.URL;
 import java.util.List;
@@ -29,8 +30,13 @@ public class ResultController implements Initializable {
     @FXML
     private Text txtUserInfo;
 
-    private UserServiceSingleton userServiceSingleton;
+    @FXML
+    private Text txtUserPortrait;
 
+    private CurrentUserService currentUserService;
+    private StatisticsService statisticsService;
+
+    private User user;
     private List<Answer> userAnswers;
 
     @Override
@@ -42,28 +48,30 @@ public class ResultController implements Initializable {
     }
 
     private void formatVisualElements() {
-        User user = userServiceSingleton.getUser();
+        user = currentUserService.getUser();
         userAnswers = user.getAnswers();
         txtUserInfo.setText(user.toString());
         scrollFeed.setContent(vboxFeed);
         scrollFeed.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollFeed.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        vboxFeed.setStyle("-fx-background-color: #342f37");
-        scrollFeed.setStyle("-fx-background-color: transparent");
+        vboxFeed.setStyle("-fx-background-color: #5e5363");
+        vboxFeedTitle.setStyle("-fx-background-color: transparent");
+        scrollFeed.setStyle("-fx-background-color: #5e5363");
     }
 
-
     private void injectServices() {
-        userServiceSingleton = UserServiceSingleton.getInstance();
+        currentUserService = CurrentUserService.getInstance();
+        statisticsService = new StatisticsService();
     }
 
     private void showResults() {
         vboxFeedTitle.getChildren().add(new OverallStatsPanel());
         userAnswers.forEach(answer -> vboxFeed.getChildren().add(new AnswerStatsPanel(answer)));
+        txtUserPortrait.setText(statisticsService.calculatePersonType(user).getLithuanianValue());
     }
 
     private void saveResults() {
-        userServiceSingleton.saveUser();
+        currentUserService.saveUser();
     }
 
 }

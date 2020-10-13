@@ -8,8 +8,10 @@ import javafx.scene.control.TextField;
 import lt.verbus.controller.stage_controllers.StageController;
 import lt.verbus.exception.EmptyFieldException;
 import lt.verbus.domain.entity.User;
+import lt.verbus.multithreading.SessionOpeningThread;
 import lt.verbus.service.CurrentUserService;
 import lt.verbus.util.SessionFactoryUtil;
+import org.hibernate.Session;
 
 import java.io.IOException;
 import java.net.URL;

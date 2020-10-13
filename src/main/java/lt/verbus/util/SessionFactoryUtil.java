@@ -2,6 +2,8 @@ package lt.verbus.util;
 
 import lt.verbus.exception.EmptyRepositoryException;
 import lt.verbus.exception.NumberOfQuestionsMismatchException;
+import lt.verbus.multithreading.SessionOpeningThread;
+import lt.verbus.multithreading.UserSaveThread;
 import lt.verbus.service.InitialValidatorService;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -23,24 +25,12 @@ public class SessionFactoryUtil {
         if (session == null || !session.isOpen()) {
             Runnable persistance =
                     () -> {
-                session = SessionFactoryUtil.getFactory().openSession();
-                        InitialValidatorService validator = new InitialValidatorService();
-                        try {
-                            validator.validateUserRepository();
-                            System.out.println("INFO: USERS FOUND");
-                        } catch (EmptyRepositoryException e) {
-                            System.out.println("ERROR: No users found in database.");
-                        }
-
-                        try {
-                            validator.validateQuestionRepository();
-                            System.out.println("INFO: NUMBER OF QUESTION MATCHES ANSWERS");
-                        } catch (NumberOfQuestionsMismatchException e) {
-                            System.out.println("ERROR: Number of questions differs from number of answers in database.");
-                        }
+                    session = SessionFactoryUtil.getFactory().openSession();
                     };
             Thread sessionOpeningThread = new Thread(persistance);
             sessionOpeningThread.start();
+            System.out.println("starting session");
+//            new SessionOpeningThread(session).start();
         }
         return session;
     }

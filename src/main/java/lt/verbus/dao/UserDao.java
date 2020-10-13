@@ -1,6 +1,8 @@
 package lt.verbus.dao;
 
 import lt.verbus.domain.entity.User;
+import lt.verbus.multithreading.SessionOpeningThread;
+import lt.verbus.multithreading.UserSaveThread;
 import lt.verbus.util.SessionFactoryUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -40,21 +42,23 @@ public class UserDao implements CrudRepository<User> {
 
     @Override
     public void save(User user) {
-        session = SessionFactoryUtil.getSession();
-        Transaction transaction = null;
-        try {
-            transaction = session.beginTransaction();
-            session.save(user);
-            transaction.commit();
-            System.out.println("User saved");
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-                e.printStackTrace();
-            }
-        } finally {
-            session.close();
-        }
+
+                session = SessionFactoryUtil.getSession();
+        new UserSaveThread(session, user).start();
+//        Transaction transaction = null;
+//        try {
+//            transaction = session.beginTransaction();
+//            session.save(user);
+//            transaction.commit();
+//            System.out.println("User saved");
+//        } catch (Exception e) {
+//            if (transaction != null) {
+//                transaction.rollback();
+//                e.printStackTrace();
+//            }
+//        } finally {
+//            session.close();
+//        }
     }
 
     @Override

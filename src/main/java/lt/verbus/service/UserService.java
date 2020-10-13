@@ -7,7 +7,7 @@ import java.util.List;
 
 public class UserService {
 
-    UserDao userDao;
+    private final UserDao userDao;
 
     public UserService(){
         userDao = new UserDao();
@@ -15,6 +15,10 @@ public class UserService {
 
     public List<User> findAll(){
         return userDao.findAll();
+    }
+
+    public void save(User user) {
+        userDao.save(user);
     }
 
 }

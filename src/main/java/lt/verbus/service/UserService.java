@@ -21,4 +21,8 @@ public class UserService {
         userDao.save(user);
     }
 
+    public void deleteAll(){
+        userDao.deleteAll();
+    }
+
 }

@@ -1,7 +1,6 @@
 package lt.verbus.dao;
 
 import lt.verbus.domain.entity.User;
-import lt.verbus.multithreading.SessionOpeningThread;
 import lt.verbus.multithreading.UserSaveThread;
 import lt.verbus.util.SessionFactoryUtil;
 import org.hibernate.Session;
@@ -43,7 +42,7 @@ public class UserDao implements CrudRepository<User> {
     @Override
     public void save(User user) {
 
-                session = SessionFactoryUtil.getSession();
+        session = SessionFactoryUtil.getSession();
         new UserSaveThread(session, user).start();
 //        Transaction transaction = null;
 //        try {
@@ -67,12 +66,11 @@ public class UserDao implements CrudRepository<User> {
     }
 
     /**
-     *
      * @param criteriaCustomizer - functional interface for custom criteria definition
-     * @param resultClass - class name of object that query should return
-     * @param sourceClass - class name of object that query parameters should be based on
-     * @param <T> - object type to be constructed from database
-     * @param <S> - object type the query parameters are based on
+     * @param resultClass        - class name of object that query should return
+     * @param sourceClass        - class name of object that query parameters should be based on
+     * @param <T>                - object type to be constructed from database
+     * @param <S>                - object type the query parameters are based on
      */
     protected <T, S> Query<T> createCustomQuery(CriteriaCustomizer<T> criteriaCustomizer,
                                                 Class<T> resultClass,
@@ -88,4 +86,25 @@ public class UserDao implements CrudRepository<User> {
         return session.createQuery(criteria);
     }
 
+    public void deleteAll() {
+        session = SessionFactoryUtil.getSession();
+        Transaction transaction = null;
+
+        String deleteAllUsersHql = "delete from User";
+        Query deleteAllUsersQuery = session.createQuery(deleteAllUsersHql);
+        String deleteAllAnswersHql = "delete from Answer";
+        Query deleteAllAnswersQuery = session.createQuery(deleteAllAnswersHql);
+
+        try {
+            transaction = session.beginTransaction();
+            System.out.println(deleteAllUsersQuery.executeUpdate() + " entries deleted.");
+            System.out.println(deleteAllAnswersQuery.executeUpdate() + " entries deleted.");
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+                e.printStackTrace();
+            }
+        }
+    }
 }

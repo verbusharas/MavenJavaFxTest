@@ -25,7 +25,6 @@ public class UserSaveThread extends Thread{
                 e.printStackTrace();
             }
         }
-        synchronized (session){
             System.out.println("atempting early save");
             Transaction transaction = null;
             try {
@@ -38,9 +37,9 @@ public class UserSaveThread extends Thread{
                     transaction.rollback();
                     e.printStackTrace();
                 }
-            } finally {
-                session.close();
-            }
+//            finally {
+//                session.close();
+//            }
         }
     }
 

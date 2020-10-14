@@ -8,10 +8,7 @@ import javafx.scene.control.TextField;
 import lt.verbus.controller.stage_controllers.StageController;
 import lt.verbus.exception.EmptyFieldException;
 import lt.verbus.domain.entity.User;
-import lt.verbus.multithreading.SessionOpeningThread;
 import lt.verbus.service.CurrentUserService;
-import lt.verbus.util.SessionFactoryUtil;
-import org.hibernate.Session;
 
 import java.io.IOException;
 import java.net.URL;
@@ -34,9 +31,6 @@ public class WelcomeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         lblException.setVisible(false);
-
-        //For better performance - opens session before reaching results Scene
-        SessionFactoryUtil.getSession();
     }
 
     public void btStartQuizClicked() throws IOException {

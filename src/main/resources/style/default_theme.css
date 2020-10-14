@@ -1,24 +1,18 @@
 {
     black: #000000;
-    yellow: #fff600;
-    yellow_lighter: #fffca3;
-    yellow_transparent: rgba(255, 246, 0, 0.8);
-    purple: rgba(86, 64, 100, 1);
-    purple_lighter: rgba(100, 80, 114, 1);
-    purple_transparent: rgba(86, 64, 100, 0.8);
     white: #ffffff;
-    bright_red: #ff635b;
+
+    yellow: #fff600;
+    yellow-transparent: rgba(255, 246, 0, 0.8);
+    yellow-light: #fffca3;
+
+    purple: rgba(86, 64, 100, 1);
+    purple-light: rgba(100, 80, 114, 1);
+    purple-transparent: rgba(86, 64, 100, 0.8);
 }
 
 .root {
-    -fx-background-image: url("background_image_welcome_3.jpg");
-}
-
-.button {
-    -fx-font: 12px Arial;
-    -fx-text-fill: black;
-    -fx-background-color: yellow_transparent;
-    -fx-background-radius: 0;
+    -fx-background-image: url("bg-main.jpg");
 }
 
 .hyperlink {
@@ -26,13 +20,21 @@
     -fx-border-color: transparent;
 }
 
+.button {
+    -fx-font: 12px Arial;
+    -fx-text-fill: black;
+    -fx-background-color: yellow-transparent;
+    -fx-background-radius: 0;
+}
+
 .button:hover {
     -fx-background-color: yellow;
 }
 
 .button:pressed {
-    -fx-background-color: yellow_lighter;
+    -fx-background-color: yellow-light;
 }
+
 
 .label {
     -fx-font: 12px Arial;
@@ -50,7 +52,7 @@
 
 .slider {
     -slider-filled-track-color: yellow;
-    -slider-track-color: purple_lighter;
+    -slider-track-color: purple-light;
 }
 
 .slider .thumb {
@@ -74,7 +76,7 @@
 #GameOfThronesButton {
     -fx-font: 12px Arial;
     -fx-text-fill: white;
-    -fx-background-color: purple_transparent;
+    -fx-background-color: purple-transparent;
 }
 
 #GameOfThronesButton:hover {
@@ -82,7 +84,7 @@
 }
 
 #GameOfThronesButton:pressed {
-    -fx-background-color: purple_lighter;
+    -fx-background-color: purple-light;
 }
 
 #ExceptionLabel {
@@ -92,6 +94,11 @@
 #txtUserInfo {
     -fx-fill: white;
 }
+
+.statistical-text {
+    fx-fill: red;
+}
+
 
 #txtUserPortrait {
     -fx-fill: yellow;

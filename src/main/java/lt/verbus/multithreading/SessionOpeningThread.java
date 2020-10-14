@@ -1,27 +1,21 @@
 package lt.verbus.multithreading;
+import lt.verbus.util.SessionFactoryUtil;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 
 public class SessionOpeningThread extends Thread {
 
     private Session session;
 
-    public SessionOpeningThread() {
-    }
-
     @Override
     public void run(){
-        SessionFactory factory = new Configuration().configure().buildSessionFactory();
-        synchronized (session) {
-            session = factory.openSession();
+        while (session == null) {
+            try {
+                Thread.sleep(1000);
+                session = SessionFactoryUtil.getSession();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
-    }
-
-    public Session getSession() {
-        synchronized (session) {
-            return new Configuration().configure().buildSessionFactory().openSession();
-        }
     }
 }

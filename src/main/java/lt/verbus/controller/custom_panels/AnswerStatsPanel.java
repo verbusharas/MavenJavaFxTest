@@ -13,8 +13,6 @@ import lt.verbus.service.QuestionService;
 import lt.verbus.service.StatisticsService;
 import lt.verbus.util.StatsTextBuilder;
 
-import java.io.IOException;
-
 public class AnswerStatsPanel extends HBox {
 
     private final Answer userAnswer;
@@ -28,6 +26,7 @@ public class AnswerStatsPanel extends HBox {
     private TextFlow txtStatisticsAgainstCorrect;
     private TextFlow txtStatisticsAgainstSingleAvg;
     private Hyperlink btRemindQuestion;
+    private Question question;
 
     public AnswerStatsPanel(Answer userAnswer) {
         this.userAnswer = userAnswer;
@@ -62,7 +61,7 @@ public class AnswerStatsPanel extends HBox {
 
     private void setNodeValues() {
         int questionIndex = userAnswer.getQuestionIndex();
-        Question question = questionService.getQuestionByIndex(questionIndex);
+        question = questionService.getQuestionByIndex(questionIndex);
 
         txtQuestionNumber.setText("KLAUSIME NR. " + (questionIndex + 1));
         btRemindQuestion.setText("Priminti klausimą?");
@@ -87,14 +86,6 @@ public class AnswerStatsPanel extends HBox {
         txtStatisticsAgainstSingleAvg = builder.build();
     }
 
-    private void btRemindQuestionClicked() {
-        try {
-            StageController.popUpQuestionReminder();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     private void populatePanelWithNodes() {
         VBox questionColumn = new VBox();
         VBox answerColumn = new VBox();
@@ -105,6 +96,10 @@ public class AnswerStatsPanel extends HBox {
         statsColumn.getChildren().addAll(txtStatisticsAgainstCorrect, txtStatisticsAgainstSingleAvg);
 
         getChildren().addAll(questionColumn, answerColumn, statsColumn);
+    }
+
+    private void btRemindQuestionClicked() {
+        StageController.popUpQuestionReminder(question);
     }
 
 }

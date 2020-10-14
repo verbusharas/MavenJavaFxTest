@@ -1,0 +1,37 @@
+.root {
+    -fx-background-image: url("bg-pop-up.jpg");
+}
+
+.button {
+    -fx-font: 12px Arial;
+    -fx-text-fill: black;
+    -fx-background-color: white;
+    -fx-background-radius: 0;
+}
+
+.label {
+    -fx-text-fill: white;
+}
+
+.check-box {
+    selected-box-color: white;
+    box-color: white;
+    mark-color: black;
+
+    -fx-text-fill: white;
+}
+
+.check-box:selected > .box {
+    -fx-background-color: selected-box-color;
+    -fx-background-radius: 0;
+}
+
+.check-box > .box {
+    -fx-background-color: box-color;
+    -fx-background-radius: 0;
+}
+
+.check-box:selected > .box > .mark,
+.check-box:indeterminate  > .box > .mark {
+    -fx-background-color: mark-color;
+}

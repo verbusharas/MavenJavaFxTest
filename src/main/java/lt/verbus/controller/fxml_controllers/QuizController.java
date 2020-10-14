@@ -82,7 +82,7 @@ public class QuizController implements Initializable {
         });
     }
 
-    public void btNextQuestionClicked() throws IOException {
+    public void btNextQuestionClicked() {
         setUserAnswer(Integer.parseInt(txtSliderIndicator.getText()));
         boolean hasRemainingQuestions = ++currentQuestionIndex < totalQuestions;
         if (hasRemainingQuestions) {

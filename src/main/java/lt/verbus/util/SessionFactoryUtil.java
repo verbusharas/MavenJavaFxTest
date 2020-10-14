@@ -1,10 +1,4 @@
 package lt.verbus.util;
-
-import lt.verbus.exception.EmptyRepositoryException;
-import lt.verbus.exception.NumberOfQuestionsMismatchException;
-import lt.verbus.multithreading.SessionOpeningThread;
-import lt.verbus.multithreading.UserSaveThread;
-import lt.verbus.service.InitialValidatorService;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -30,7 +24,6 @@ public class SessionFactoryUtil {
             Thread sessionOpeningThread = new Thread(persistance);
             sessionOpeningThread.start();
             System.out.println("starting session");
-//            new SessionOpeningThread(session).start();
         }
         return session;
     }
